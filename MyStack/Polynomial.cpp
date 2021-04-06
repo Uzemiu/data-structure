@@ -96,10 +96,11 @@ void Polynomial::equals_difference(Polynomial p, Polynomial q) {
 }
 
 void Polynomial::equals_product(Polynomial p, Polynomial q) {
+	throw "Not implemented";
 }
 
 bool Polynomial::equals_quotient(Polynomial p, Polynomial q) {
-	return false;
+	throw "Not implemented";
 }
 
 int Polynomial::degree(){

@@ -25,6 +25,18 @@
     <Filter Include="源文件\impl">
       <UniqueIdentifier>{143113b0-fff9-4668-aff4-417d7c3e6d56}</UniqueIdentifier>
     </Filter>
+    <Filter Include="头文件\string">
+      <UniqueIdentifier>{84719c86-9065-4880-b10a-c8004733499a}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="源文件\string">
+      <UniqueIdentifier>{27424d40-5386-4112-a064-d065738ab66e}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="头文件\algorithm">
+      <UniqueIdentifier>{672b775a-58cf-4752-b782-f8638594770a}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="源文件\algorithm">
+      <UniqueIdentifier>{aafed195-ed6a-45d2-bafa-a431bd7e6685}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="main.cpp">
@@ -51,6 +63,18 @@
     <ClCompile Include="StackTest.cpp">
       <Filter>源文件\impl</Filter>
     </ClCompile>
+    <ClCompile Include="LinkedStack.cpp">
+      <Filter>源文件\collection</Filter>
+    </ClCompile>
+    <ClCompile Include="String.cpp">
+      <Filter>源文件\string</Filter>
+    </ClCompile>
+    <ClCompile Include="Algorithm.cpp">
+      <Filter>源文件\algorithm</Filter>
+    </ClCompile>
+    <ClCompile Include="OrderedList.cpp">
+      <Filter>源文件</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="LinkedList.h">
@@ -67,6 +91,21 @@
     </ClInclude>
     <ClInclude Include="Polynomial.h">
       <Filter>头文件\impl</Filter>
+    </ClInclude>
+    <ClInclude Include="LinkedStack.h">
+      <Filter>头文件\collection</Filter>
+    </ClInclude>
+    <ClInclude Include="String.h">
+      <Filter>头文件\string</Filter>
+    </ClInclude>
+    <ClInclude Include="List.h">
+      <Filter>头文件\collection</Filter>
+    </ClInclude>
+    <ClInclude Include="Algorithm.h">
+      <Filter>头文件\algorithm</Filter>
+    </ClInclude>
+    <ClInclude Include="OrderedList.h">
+      <Filter>头文件</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

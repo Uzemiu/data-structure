@@ -1,17 +1,8 @@
 #pragma once
-
-template<class T>
-struct Node {
-	T ele;
-	Node<T>* next;
-	Node<T>* prev;
-	Node() : ele(T()), next(nullptr), prev(nullptr) {}
-	Node(const T& ele) : ele(ele), next(nullptr), prev(nullptr) {}
-};
-
+#include "List.h"
 
 template <class T>
-class LinkedList{
+class LinkedList: List<T>{
 public:
 	LinkedList();
 	LinkedList(const LinkedList<T> &list);
@@ -37,11 +28,24 @@ public:
 	template<class Fun>
 	void for_each(Fun fun);
 
+	T* to_array();
+
 	size_t size();
 	bool empty() const;
 	void clear();
 
+
 protected:
+
+	template<class T>
+	struct Node {
+		T ele;
+		Node<T>* next;
+		Node<T>* prev;
+		Node() : ele(T()), next(nullptr), prev(nullptr) {}
+		Node(const T& ele) : ele(ele), next(nullptr), prev(nullptr) {}
+	};
+
 	Node<T>* head;
 	size_t _size;
 

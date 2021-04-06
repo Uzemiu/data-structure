@@ -150,6 +150,16 @@ void LinkedList<T>::for_each(Fun fun) {
 }
 
 template<class T>
+T* LinkedList<T>::to_array() {
+	T* arr = new T[_size];
+	int i = 0;
+	for_each([&i, arr](T& ele) {
+		arr[i++] = ele;
+			 });
+	return arr;
+}
+
+template<class T>
 size_t LinkedList<T>::size() {
 	return _size;
 }

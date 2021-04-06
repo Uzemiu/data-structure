@@ -153,21 +153,30 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="Algorithm.cpp" />
     <ClCompile Include="Demonstration.cpp" />
     <ClCompile Include="Joseph.cpp" />
     <ClCompile Include="LinkedList.cpp" />
+    <ClCompile Include="LinkedStack.cpp" />
     <ClCompile Include="main.cpp" />
     <ClCompile Include="MyDeque.cpp" />
     <ClCompile Include="MyStack.cpp" />
+    <ClCompile Include="OrderedList.cpp" />
     <ClCompile Include="Polynomial.cpp" />
     <ClCompile Include="StackTest.cpp" />
+    <ClCompile Include="String.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="Algorithm.h" />
     <ClInclude Include="LinkedList.h" />
+    <ClInclude Include="LinkedStack.h" />
+    <ClInclude Include="List.h" />
     <ClInclude Include="MyDeque.h" />
     <ClInclude Include="MyQueue.h" />
     <ClInclude Include="MyStack.h" />
+    <ClInclude Include="OrderedList.h" />
     <ClInclude Include="Polynomial.h" />
+    <ClInclude Include="String.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

@@ -155,6 +155,7 @@
   <ItemGroup>
     <ClCompile Include="Algorithm.cpp" />
     <ClCompile Include="Demonstration.cpp" />
+    <ClCompile Include="HashTable.cpp" />
     <ClCompile Include="Joseph.cpp" />
     <ClCompile Include="LinkedList.cpp" />
     <ClCompile Include="LinkedStack.cpp" />
@@ -163,11 +164,13 @@
     <ClCompile Include="MyStack.cpp" />
     <ClCompile Include="OrderedList.cpp" />
     <ClCompile Include="Polynomial.cpp" />
+    <ClCompile Include="SortableList.cpp" />
     <ClCompile Include="StackTest.cpp" />
     <ClCompile Include="String.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Algorithm.h" />
+    <ClInclude Include="HashTable.h" />
     <ClInclude Include="LinkedList.h" />
     <ClInclude Include="LinkedStack.h" />
     <ClInclude Include="List.h" />
@@ -176,6 +179,7 @@
     <ClInclude Include="MyStack.h" />
     <ClInclude Include="OrderedList.h" />
     <ClInclude Include="Polynomial.h" />
+    <ClInclude Include="SortableList.h" />
     <ClInclude Include="String.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />

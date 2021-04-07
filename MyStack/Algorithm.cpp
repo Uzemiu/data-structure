@@ -1,4 +1,5 @@
 #include "Algorithm.h"
+#include "LinkedList.cpp"
 
 #include <algorithm>
 #include <vector>
@@ -40,7 +41,6 @@ void Algorithm::quick_sort(T* arr, int from, int to) {
 template<class T>
 void Algorithm::heap_sort(T* arr, int len) {
 	// build heap
-
 	for (int i = len / 2 - 1; i >= 0; i--) {
 		insert_heap(arr, i, len);
 	}
@@ -81,4 +81,29 @@ void Algorithm::insert_heap(T *arr, int i, int to) {
 		}
 	}
 	arr[i] = tmp;
+}
+
+void Algorithm::radix_sort(string* arr, int len) {
+	if (!arr) return;
+	LinkedList<string> bucket[MAX_CHAR];
+	int str_len = arr[0].length();
+	for (int i = str_len; i >= 0; i--) {
+		for (int j = 0; j < len; j++) {
+			int order = alphabetic_order(arr[j][i]);
+			bucket[order].push_last(arr[j]);
+		}
+		// rethread
+		int j = 0;
+
+	}
+}
+
+int Algorithm::alphabetic_order(char c) {
+	if (c == ' ') return 0;
+	if (islower(c)) return c - 'a' + 1;
+	if (isupper(c)) return c - 'A' + 1;
+	return 27;
+}
+
+void Algorithm::rethread(LinkedList<string> bucket[28]) {
 }

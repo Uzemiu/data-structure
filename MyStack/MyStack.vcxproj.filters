@@ -37,18 +37,24 @@
     <Filter Include="源文件\algorithm">
       <UniqueIdentifier>{aafed195-ed6a-45d2-bafa-a431bd7e6685}</UniqueIdentifier>
     </Filter>
+    <Filter Include="头文件\collection\v1">
+      <UniqueIdentifier>{3fb7e9d3-8eca-46b6-b8ec-d01918472fd7}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="源文件\collection\v1">
+      <UniqueIdentifier>{4d7e5d10-5b0d-4335-bf36-6ac235799047}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="头文件\tree">
+      <UniqueIdentifier>{76c49011-c4ae-4ecb-9eed-fe91387187bb}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="源文件\tree">
+      <UniqueIdentifier>{bb5ef585-4638-4dc3-a5ef-f635943f872c}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="main.cpp">
       <Filter>源文件</Filter>
     </ClCompile>
     <ClCompile Include="LinkedList.cpp">
-      <Filter>源文件\collection</Filter>
-    </ClCompile>
-    <ClCompile Include="MyDeque.cpp">
-      <Filter>源文件\collection</Filter>
-    </ClCompile>
-    <ClCompile Include="MyStack.cpp">
       <Filter>源文件\collection</Filter>
     </ClCompile>
     <ClCompile Include="Demonstration.cpp">
@@ -73,20 +79,23 @@
       <Filter>源文件\algorithm</Filter>
     </ClCompile>
     <ClCompile Include="OrderedList.cpp">
+      <Filter>源文件\collection</Filter>
+    </ClCompile>
+    <ClCompile Include="SortableList.cpp">
+      <Filter>源文件\collection</Filter>
+    </ClCompile>
+    <ClCompile Include="MyDeque.cpp">
+      <Filter>源文件\collection\v1</Filter>
+    </ClCompile>
+    <ClCompile Include="MyStack.cpp">
+      <Filter>源文件\collection\v1</Filter>
+    </ClCompile>
+    <ClCompile Include="HashTable.cpp">
       <Filter>源文件</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="LinkedList.h">
-      <Filter>头文件\collection</Filter>
-    </ClInclude>
-    <ClInclude Include="MyDeque.h">
-      <Filter>头文件\collection</Filter>
-    </ClInclude>
-    <ClInclude Include="MyQueue.h">
-      <Filter>头文件\collection</Filter>
-    </ClInclude>
-    <ClInclude Include="MyStack.h">
       <Filter>头文件\collection</Filter>
     </ClInclude>
     <ClInclude Include="Polynomial.h">
@@ -105,6 +114,21 @@
       <Filter>头文件\algorithm</Filter>
     </ClInclude>
     <ClInclude Include="OrderedList.h">
+      <Filter>头文件\collection</Filter>
+    </ClInclude>
+    <ClInclude Include="SortableList.h">
+      <Filter>头文件\collection</Filter>
+    </ClInclude>
+    <ClInclude Include="MyStack.h">
+      <Filter>头文件\collection\v1</Filter>
+    </ClInclude>
+    <ClInclude Include="MyQueue.h">
+      <Filter>头文件\collection\v1</Filter>
+    </ClInclude>
+    <ClInclude Include="MyDeque.h">
+      <Filter>头文件\collection\v1</Filter>
+    </ClInclude>
+    <ClInclude Include="HashTable.h">
       <Filter>头文件</Filter>
     </ClInclude>
   </ItemGroup>

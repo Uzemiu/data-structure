@@ -22,5 +22,6 @@ public:
 			remove(tmp);
 		}
 		cout << "The left element is: " << node->ele << endl;
+		clear();
 	}
 };

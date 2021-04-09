@@ -139,6 +139,15 @@ T LinkedList<T>::remove(int i) {
 }
 
 template<class T>
+void LinkedList<T>::replace(int i, const T& ele) {
+	Node<T>* node = head;
+	for (; i > 0; i--) {
+		node = node->next;
+	}
+	node->ele = ele;
+}
+
+template<class T>
 template<class Fun>
 void LinkedList<T>::for_each(Fun fun) {
 	if (empty()) return;

@@ -49,13 +49,22 @@
     <Filter Include="源文件\tree">
       <UniqueIdentifier>{bb5ef585-4638-4dc3-a5ef-f635943f872c}</UniqueIdentifier>
     </Filter>
+    <Filter Include="头文件\collection\list">
+      <UniqueIdentifier>{7fbee9a0-e10b-4d97-bee3-7e9581ac0991}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="源文件\collection\list">
+      <UniqueIdentifier>{4ba73871-dd24-44b0-9418-234ca9a0d15d}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="头文件\collection\table">
+      <UniqueIdentifier>{539cf05c-c895-4783-9f19-edcdfc310e3d}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="源文件\collection\table">
+      <UniqueIdentifier>{650a4ee8-1b4e-41cf-af06-3dfa60c72096}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="main.cpp">
       <Filter>源文件</Filter>
-    </ClCompile>
-    <ClCompile Include="LinkedList.cpp">
-      <Filter>源文件\collection</Filter>
     </ClCompile>
     <ClCompile Include="Demonstration.cpp">
       <Filter>源文件\impl</Filter>
@@ -69,20 +78,11 @@
     <ClCompile Include="StackTest.cpp">
       <Filter>源文件\impl</Filter>
     </ClCompile>
-    <ClCompile Include="LinkedStack.cpp">
-      <Filter>源文件\collection</Filter>
-    </ClCompile>
     <ClCompile Include="String.cpp">
       <Filter>源文件\string</Filter>
     </ClCompile>
     <ClCompile Include="Algorithm.cpp">
       <Filter>源文件\algorithm</Filter>
-    </ClCompile>
-    <ClCompile Include="OrderedList.cpp">
-      <Filter>源文件\collection</Filter>
-    </ClCompile>
-    <ClCompile Include="SortableList.cpp">
-      <Filter>源文件\collection</Filter>
     </ClCompile>
     <ClCompile Include="MyDeque.cpp">
       <Filter>源文件\collection\v1</Filter>
@@ -90,34 +90,37 @@
     <ClCompile Include="MyStack.cpp">
       <Filter>源文件\collection\v1</Filter>
     </ClCompile>
-    <ClCompile Include="HashTable.cpp">
-      <Filter>源文件</Filter>
+    <ClCompile Include="LinkedList.cpp">
+      <Filter>源文件\collection\list</Filter>
+    </ClCompile>
+    <ClCompile Include="LinkedStack.cpp">
+      <Filter>源文件\collection\list</Filter>
+    </ClCompile>
+    <ClCompile Include="OrderedList.cpp">
+      <Filter>源文件\collection\list</Filter>
+    </ClCompile>
+    <ClCompile Include="SortableList.cpp">
+      <Filter>源文件\collection\list</Filter>
+    </ClCompile>
+    <ClCompile Include="AHashTable.cpp">
+      <Filter>源文件\collection\table</Filter>
+    </ClCompile>
+    <ClCompile Include="CHashTable.cpp">
+      <Filter>源文件\collection\table</Filter>
+    </ClCompile>
+    <ClCompile Include="BinaryTree.cpp">
+      <Filter>源文件\tree</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="LinkedList.h">
-      <Filter>头文件\collection</Filter>
-    </ClInclude>
     <ClInclude Include="Polynomial.h">
       <Filter>头文件\impl</Filter>
-    </ClInclude>
-    <ClInclude Include="LinkedStack.h">
-      <Filter>头文件\collection</Filter>
     </ClInclude>
     <ClInclude Include="String.h">
       <Filter>头文件\string</Filter>
     </ClInclude>
-    <ClInclude Include="List.h">
-      <Filter>头文件\collection</Filter>
-    </ClInclude>
     <ClInclude Include="Algorithm.h">
       <Filter>头文件\algorithm</Filter>
-    </ClInclude>
-    <ClInclude Include="OrderedList.h">
-      <Filter>头文件\collection</Filter>
-    </ClInclude>
-    <ClInclude Include="SortableList.h">
-      <Filter>头文件\collection</Filter>
     </ClInclude>
     <ClInclude Include="MyStack.h">
       <Filter>头文件\collection\v1</Filter>
@@ -128,8 +131,32 @@
     <ClInclude Include="MyDeque.h">
       <Filter>头文件\collection\v1</Filter>
     </ClInclude>
+    <ClInclude Include="LinkedList.h">
+      <Filter>头文件\collection\list</Filter>
+    </ClInclude>
+    <ClInclude Include="LinkedStack.h">
+      <Filter>头文件\collection\list</Filter>
+    </ClInclude>
+    <ClInclude Include="List.h">
+      <Filter>头文件\collection\list</Filter>
+    </ClInclude>
+    <ClInclude Include="OrderedList.h">
+      <Filter>头文件\collection\list</Filter>
+    </ClInclude>
+    <ClInclude Include="SortableList.h">
+      <Filter>头文件\collection\list</Filter>
+    </ClInclude>
+    <ClInclude Include="AHashTable.h">
+      <Filter>头文件\collection\table</Filter>
+    </ClInclude>
+    <ClInclude Include="CHashTable.h">
+      <Filter>头文件\collection\table</Filter>
+    </ClInclude>
     <ClInclude Include="HashTable.h">
-      <Filter>头文件</Filter>
+      <Filter>头文件\collection\table</Filter>
+    </ClInclude>
+    <ClInclude Include="BinaryTree.h">
+      <Filter>头文件\tree</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

@@ -154,8 +154,10 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="Algorithm.cpp" />
+    <ClCompile Include="BinaryTree.cpp" />
+    <ClCompile Include="CHashTable.cpp" />
     <ClCompile Include="Demonstration.cpp" />
-    <ClCompile Include="HashTable.cpp" />
+    <ClCompile Include="AHashTable.cpp" />
     <ClCompile Include="Joseph.cpp" />
     <ClCompile Include="LinkedList.cpp" />
     <ClCompile Include="LinkedStack.cpp" />
@@ -170,6 +172,9 @@
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Algorithm.h" />
+    <ClInclude Include="BinaryTree.h" />
+    <ClInclude Include="CHashTable.h" />
+    <ClInclude Include="AHashTable.h" />
     <ClInclude Include="HashTable.h" />
     <ClInclude Include="LinkedList.h" />
     <ClInclude Include="LinkedStack.h" />

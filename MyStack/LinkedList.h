@@ -22,8 +22,9 @@ public:
 
 	int find(const T &ele);
 	T& get(int index);
-	void insert(int i, const T &ele);
+	void insert(int i, const T& ele);
 	T remove(int i);
+	void replace(int i, const T& ele);
 
 	template<class Fun>
 	void for_each(Fun fun);

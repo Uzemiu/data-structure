@@ -1,14 +1,24 @@
 #pragma once
+#include <algorithm>
+using namespace std;
 template<class K, class V>
 class HashTable {
 public:
-	void clear();
-	void insert(const K key, const V value);
-	V& get(const K& key) const;
-	bool remove(const K& key, const V& value);
+	virtual void clear() = 0;
+	virtual bool insert(const K key, const V value) = 0;
+	virtual bool get(const K& key, V& value) = 0;
+	virtual bool exists(const K& key) = 0;
+	virtual bool remove(const K& key, V& value) = 0;
 
-private:
 	const static int HASH_SIZE = 97;
-	V table[HASH_SIZE];
+
+	template<class T>
+	int hash(const T& t);
 };
 
+template<class K, class V>
+template<class T>
+inline int HashTable<K, V>::hash(const T& t) {
+	std::hash<T> h;
+	return h(t) % HASH_SIZE;
+}

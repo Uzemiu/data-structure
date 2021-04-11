@@ -90,8 +90,8 @@ void polishCalculator() {
 	}
 }
 
-string chars = "0123456789ABCDEFGHUIKLMNOPQRSTUVWXYZ";
 string conversion(int dec, int radix) {
+	string chars = "0123456789ABCDEFGHUIKLMNOPQRSTUVWXYZ";
 	MyStack<int> s;
 	do {
 		s.push(dec % radix);

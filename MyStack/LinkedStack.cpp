@@ -23,10 +23,10 @@ size_t LinkedStack<T>::size() {
 
 template<class T>
 bool LinkedStack<T>::empty() {
-	return LinkedStack<T>::empty();
+	return LinkedList<T>::empty();
 }
 
 template<class T>
 void LinkedStack<T>::clear() {
-	LinkedStack<T>::clear();
+	LinkedList<T>::clear();
 }

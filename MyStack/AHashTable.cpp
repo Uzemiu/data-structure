@@ -11,8 +11,7 @@ void AHashTable<K, V>::clear() {
 template<class K, class V>
 bool AHashTable<K, V>::insert(const K key, const V value) {
 	int probe = next_probe(key, STATUS_EXISTS);
-	if (table[probe].status == STATUS_EXISTS && table[probe].key != key) { 
-		// override only on same key duplication
+	if (table[probe].status == STATUS_EXISTS && table[probe].key == key) { 
 		return false;
 	}
 	table[probe] = Record<K, V>(key, value, true);

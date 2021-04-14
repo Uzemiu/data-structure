@@ -20,11 +20,6 @@ bool BinarySearchTree<T>::exists(const T& ele) {
 }
 
 template<class T>
-int BinarySearchTree<T>::height() const {
-	return 0;
-}
-
-template<class T>
 bool BinarySearchTree<T>::insert(Node<T>* &node, const T& ele) {
 	if (node) {
 		if (node->ele == ele) {

@@ -157,6 +157,8 @@
     <ClCompile Include="AVL.cpp" />
     <ClCompile Include="BinarySearchTree.cpp" />
     <ClCompile Include="BinaryTree.cpp" />
+    <ClCompile Include="Browser.cpp" />
+    <ClCompile Include="BuildableTree.cpp" />
     <ClCompile Include="CHashTable.cpp" />
     <ClCompile Include="Demonstration.cpp" />
     <ClCompile Include="AHashTable.cpp" />
@@ -171,12 +173,15 @@
     <ClCompile Include="SortableList.cpp" />
     <ClCompile Include="StackTest.cpp" />
     <ClCompile Include="String.cpp" />
+    <ClCompile Include="Test.h" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Algorithm.h" />
     <ClInclude Include="AVL.h" />
     <ClInclude Include="BinarySearchTree.h" />
     <ClInclude Include="BinaryTree.h" />
+    <ClInclude Include="Browser.h" />
+    <ClInclude Include="BuildableTree.h" />
     <ClInclude Include="CHashTable.h" />
     <ClInclude Include="AHashTable.h" />
     <ClInclude Include="HashTable.h" />

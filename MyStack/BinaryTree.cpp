@@ -25,7 +25,7 @@ BinaryTree<T>::~BinaryTree() {
 
 template<class T>
 void BinaryTree<T>::insert(const T &ele) {
-	Node<T>* n = new Node<T>(ele);
+	TreeNode<T>* n = new TreeNode<T>(ele);
 	if (empty()) {
 		root = n;
 		_size++;
@@ -35,7 +35,7 @@ void BinaryTree<T>::insert(const T &ele) {
 	for (int s = _size; s > 0; s = (s - 1) / 2) {
 		route.push(s & 1);
 	}
-	Node<T>* node = root;
+	TreeNode<T>* node = root;
 	while (route.size() > 1) {
 		node = (route.pop() ? node->left : node->right);
 	}
@@ -70,7 +70,7 @@ int BinaryTree<T>::height() const {
 }
 
 template<class T>
-void BinaryTree<T>::clear(Node<T>* node) {
+void BinaryTree<T>::clear(TreeNode<T>* node) {
 	if (node) {
 		clear(node->left);
 		clear(node->right);
@@ -79,9 +79,9 @@ void BinaryTree<T>::clear(Node<T>* node) {
 }
 
 template<class T>
-void BinaryTree<T>::copy(Node<T>* src, Node<T>* &dest) {
+void BinaryTree<T>::copy(TreeNode<T>* src, TreeNode<T>* &dest) {
 	if (src) {
-		dest = new Node<T>(src->ele);
+		dest = new TreeNode<T>(src->ele);
 		copy(src->left, dest->left);
 		copy(src->right, dest->right);
 	}
@@ -91,8 +91,8 @@ template<class T>
 template<class Fun>
 void BinaryTree<T>::pre_order_traverse(Fun apply) {
 	if (empty()) return;
-	Node<T>* node = root;
-	LinkedStack<Node<T>*> stack;
+	TreeNode<T>* node = root;
+	LinkedStack<TreeNode<T>*> stack;
 	stack.push(root);
 	while (!stack.empty()) {
 		node = stack.pop();
@@ -106,8 +106,8 @@ template<class T>
 template<class Fun>
 void BinaryTree<T>::in_order_traverse(Fun apply) {
 	if (empty()) return;
-	Node<T>* node = root;
-	LinkedStack<Node<T>*> stack;
+	TreeNode<T>* node = root;
+	LinkedStack<TreeNode<T>*> stack;
 	while (node || !stack.empty()) {
 		while (node) {
 			stack.push(node);
@@ -125,8 +125,8 @@ template<class T>
 template<class Fun>
 void BinaryTree<T>::post_order_traverse(Fun apply) {
 	if (empty()) return;
-	Node<T>* node = root;
-	LinkedStack<Node<T>*> stack, path;
+	TreeNode<T>* node = root;
+	LinkedStack<TreeNode<T>*> stack, path;
 	while (node || !stack.empty()) {
 		while (node) {
 			stack.push(node);

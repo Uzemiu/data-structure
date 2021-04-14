@@ -6,31 +6,31 @@
 using namespace std;
 
 template<class T>
-struct Node {
+struct TreeNode {
 	T ele;
-	Node<T>* next;
-	Node();
-	Node(T ele);
+	TreeNode<T>* next;
+	TreeNode();
+	TreeNode(T ele);
 };
 
 template<class T>
-inline Node<T>::Node() {
+inline TreeNode<T>::TreeNode() {
 	ele = T();
 	next = nullptr;
 }
 
 template<class T>
-inline Node<T>::Node(T ele) {
+inline TreeNode<T>::TreeNode(T ele) {
 	this->ele = ele;
 	next = nullptr;
 }
 
 template<class T>
-void flip(Node<T>* &head) {
-	Node<T>* prev = NULL;
-	Node<T>* cur = head;
+void flip(TreeNode<T>* &head) {
+	TreeNode<T>* prev = NULL;
+	TreeNode<T>* cur = head;
 	do{
-		Node<T>* tmp = cur;
+		TreeNode<T>* tmp = cur;
 		cur = cur->next;
 		tmp->next = prev;
 		prev = tmp;
@@ -39,7 +39,7 @@ void flip(Node<T>* &head) {
 }
 
 template<class T>
-void print(Node<T>* head) {
+void print(TreeNode<T>* head) {
 	for (; head != NULL; head = head->next) {
 		cout << head->ele << " ";
 	}
@@ -47,10 +47,10 @@ void print(Node<T>* head) {
 }
 
 int main() {
-	Node<int>* head = new Node<int>(0);
-	Node<int>* node = head;
+	TreeNode<int>* head = new TreeNode<int>(0);
+	TreeNode<int>* node = head;
 	for (int i = 1; i < 10; i++) {
-		node->next = new Node<int>(i);
+		node->next = new TreeNode<int>(i);
 		node = node->next;
 	}
 	flip(head);

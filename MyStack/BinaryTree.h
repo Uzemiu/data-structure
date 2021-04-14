@@ -5,6 +5,16 @@
 using namespace std;
 
 template<class T>
+struct TreeNode {
+	T ele;
+	TreeNode<T>* left;
+	TreeNode<T>* right;
+	TreeNode(T ele) : TreeNode::TreeNode(ele, NULL, NULL) {}
+	TreeNode(T ele, TreeNode<T>* left, TreeNode<T>* right) 
+		:ele(ele), left(left), right(right) {}
+};
+
+template<class T>
 class BinaryTree {
 public:
 	BinaryTree();
@@ -32,20 +42,11 @@ public:
 
 
 protected:
-	template<class T>
-	struct Node {
-		T ele;
-		Node<T>* left;
-		Node<T>* right;
-		Node(T ele) : Node::Node(ele, NULL, NULL) {}
-		Node(T ele, Node<T>* left, Node<T>* right) :ele(ele), left(left), right(right) {}
-	};
-
-	Node<T>* root;
+	TreeNode<T>* root;
 	int _size;
 
 private:
-	void clear(Node<T>* node);
-	void copy(Node<T>* src, Node<T>* &dest);
+	void clear(TreeNode<T>* node);
+	void copy(TreeNode<T>* src, TreeNode<T>* &dest);
 };
 

@@ -8,6 +8,7 @@ public:
 	LinkedList(const LinkedList<T> &list);
 	~LinkedList();
 	const LinkedList<T>& operator=(const LinkedList<T> &list);
+	T& operator[](int i);
 
 	void push(const T &ele);
 	T pop();

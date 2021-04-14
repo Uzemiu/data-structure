@@ -1,5 +1,6 @@
 #include "LinkedList.h"
 #include <iostream>
+using namespace std;
 
 template<class T>
 LinkedList<T>::LinkedList() {
@@ -27,6 +28,9 @@ LinkedList<T>::~LinkedList() {
 
 template<class T>
 const LinkedList<T>& LinkedList<T>::operator=(const LinkedList<T>& list) {
+	if (&list == this) {
+		return *this;
+	}
 	_size = 0;
 	head = nullptr;
 	Node<T>* node = list.head;
@@ -36,7 +40,13 @@ const LinkedList<T>& LinkedList<T>::operator=(const LinkedList<T>& list) {
 			node = node->next;
 		} while (node != list.head);
 	}
+
 	return *this;
+}
+
+template<class T>
+T& LinkedList<T>::operator[](int i) {
+	return get(i);
 }
 
 template<class T>

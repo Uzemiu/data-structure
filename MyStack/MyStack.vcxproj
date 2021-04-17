@@ -171,9 +171,11 @@
     <ClCompile Include="OrderedList.cpp" />
     <ClCompile Include="Polynomial.cpp" />
     <ClCompile Include="SortableList.cpp" />
+    <ClCompile Include="SplayTree.cpp" />
     <ClCompile Include="StackTest.cpp" />
     <ClCompile Include="String.cpp" />
     <ClCompile Include="Test.h" />
+    <ClCompile Include="Trie.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Algorithm.h" />
@@ -194,7 +196,9 @@
     <ClInclude Include="OrderedList.h" />
     <ClInclude Include="Polynomial.h" />
     <ClInclude Include="SortableList.h" />
+    <ClInclude Include="SplayTree.h" />
     <ClInclude Include="String.h" />
+    <ClInclude Include="Trie.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

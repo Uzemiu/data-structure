@@ -9,7 +9,6 @@ using namespace std;
 Board game;
 int i = 9;
 
-
 int look_ahead(const Board&game,int depth, Move&recommended) {
 	if (game.done() || depth == 0) {
 		return game.evaluate();
@@ -27,7 +26,7 @@ int look_ahead(const Board&game,int depth, Move&recommended) {
 			recommended = try_it;
 		} else if (value == best_value) {
 			time_t current = time(NULL);
-			if (current & 1) {
+			if (current & i) {
 				recommended = try_it;
 			}
 		}
@@ -39,6 +38,8 @@ int look_ahead(const Board&game,int depth, Move&recommended) {
 template<class DO_MOVE>
 void start_game(DO_MOVE player1, DO_MOVE player2) {
 	game = Board();
+	// TODO here change level
+	game.level = Board::DIFFICULTY_ABNORMAL;
 	i = 9;
 	game.instructions();
 
@@ -79,7 +80,8 @@ Move human() {
 }
 
 void start_game() {
-	start_game(human, computer);
+	//           先手       后手
+	start_game(computer, computer);
 }
 
 int main(){

@@ -7,6 +7,7 @@ Board::Board() {
 		}
 	}
 	moves_done = 0;
+	level = 0;
 }
 
 bool Board::done() const {
@@ -24,8 +25,6 @@ void Board::print() const {
 
 void Board::instructions() const {
 }
-
-const int level = 4;
 
 bool Board::better(int value, int old_value) const {
 	return (moves_done % 2 

@@ -22,9 +22,9 @@ private:
 
 	AVL<T>::Node<T>* insert(TreeNode<T>* node, const T& ele);
 	AVL<T>::Node<T>* balance(TreeNode<T>* node);
-	AVL<T>::Node<T>* rotate_with_left_child(TreeNode<T>* k2);
+	AVL<T>::Node<T>* rotate_right(TreeNode<T>* k2);
 	AVL<T>::Node<T>* double_rotate_with_left_child(TreeNode<T>* k3);
-	AVL<T>::Node<T>* rotate_with_right_child(TreeNode<T>* k2);
+	AVL<T>::Node<T>* rotate_left(TreeNode<T>* k2);
 	AVL<T>::Node<T>* double_rotate_with_right_child(TreeNode<T>* k3);
 	AVL<T>::Node<T>* remove(TreeNode<T>* node, const T& ele);
 	int get_height(TreeNode<T>* node);

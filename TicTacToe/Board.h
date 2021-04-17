@@ -7,6 +7,12 @@ using namespace std;
 
 class Board {
 public:
+	static const int DIFFICULTY_ABNORMAL = 9;
+	static const int DIFFICULTY_INSANE = 5;
+	static const int DIFFICULTY_NORMAL = 0;
+	// 0~10 越低电脑越正常
+	int level;
+
 	Board();
 	bool done() const;
 	void print() const;

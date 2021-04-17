@@ -42,22 +42,22 @@ AVL<T>::Node<T>* AVL<T>::balance(TreeNode<T>* _node) {
 	// 左树高大于右树
 	if(get_height(node->left) - get_height(node->right) > ALLOW_BALANCE)
 		if (get_height(node->left->left) >= get_height(node->left->right))
-			node = rotate_with_left_child(node); //外侧子树高，单旋转
+			node = rotate_right(node); //外侧子树高，单旋转
 		else
 			node = double_rotate_with_left_child(node); //内侧子树高，双旋转
 	//对称情况
 	else if (get_height(node->right) - get_height(node->left) > ALLOW_BALANCE)
 		if (get_height(node->right->right) >= get_height(node->right->left))
-			node = rotate_with_right_child(node); //外侧子树高，单旋转
+			node = rotate_left(node); //外侧子树高，单旋转
 		else
 			node = double_rotate_with_right_child(node); //内侧子树高，双旋转
 	node->height = max(get_height(node->left), get_height(node->right)) + 1;
 	return node;
 }
 
-//左子树高的单旋转
+//左子树高的右旋转
 template<class T>
-AVL<T>::Node<T>* AVL<T>::rotate_with_left_child(TreeNode<T>* _k2) {
+AVL<T>::Node<T>* AVL<T>::rotate_right(TreeNode<T>* _k2) {
 	Node<T>* k2 = (Node<T>*)_k2;
 	Node<T>* k1 = (Node<T>*)k2->left;
 	k2->left = k1->right;
@@ -70,13 +70,13 @@ AVL<T>::Node<T>* AVL<T>::rotate_with_left_child(TreeNode<T>* _k2) {
 //左子树高的双旋转
 template<class T>
 AVL<T>::Node<T>* AVL<T>::double_rotate_with_left_child(TreeNode<T>* k3) {
-	k3->left = rotate_with_left_child(k3->left);
-	return rotate_with_right_child(k3);
+	k3->left = rotate_left(k3->left);
+	return rotate_right(k3);
 }
 
-//右子树高的单旋转
+//右子树高的左旋转
 template<class T>
-AVL<T>::Node<T>* AVL<T>::rotate_with_right_child(TreeNode<T>* _k2) {
+AVL<T>::Node<T>* AVL<T>::rotate_left(TreeNode<T>* _k2) {
 	Node<T>* k2 = (Node<T>*)_k2;
 	Node<T>* k1 = (Node<T>*)k2->right;
 	k2->right = k1->left;
@@ -89,8 +89,8 @@ AVL<T>::Node<T>* AVL<T>::rotate_with_right_child(TreeNode<T>* _k2) {
 //右子树高的双旋转
 template<class T>
 AVL<T>::Node<T>* AVL<T>::double_rotate_with_right_child(TreeNode<T>* k3) {
-	k3->right = rotate_with_left_child(k3->right);
-	return rotate_with_right_child(k3);
+	k3->right = rotate_right(k3->right);
+	return rotate_left(k3);
 }
 
 template<class T>

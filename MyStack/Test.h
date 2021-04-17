@@ -14,6 +14,8 @@
 #include "BinarySearchTree.cpp"
 #include "BuildableTree.h"
 #include "AVL.cpp"
+#include "SplayTree.h"
+#include "Trie.h"
 #include "String.h"
 #include "Polynomial.h"
 #include "Browser.h"
@@ -203,6 +205,39 @@ public:
 		tree.in_order_traverse([](int& ele) {
 			cout << ele << endl;
 							   });
+	}
+
+
+	void test_splay_tree() {
+		SplayTree<int> st;
+		st.insert(13);
+		st.insert(5);
+		st.insert(16);
+		st.insert(3);
+		st.insert(10);
+		st.insert(14);
+		st.insert(18);
+		st.insert(2);
+		st.insert(4);
+		st.insert(8);
+		st.insert(11);
+		st.insert(15);
+		st.insert(17);
+		st.insert(20);
+		st.insert(1);
+		st.insert(7);
+		st.insert(9);
+		st.insert(12);
+		st.insert(19);
+		st.insert(6);
+
+		st.splay(19);
+
+		cout << "-------------------------" << endl;
+		st.pre_order_traverse([](int& i) {
+			cout << i << " ";
+							  });
+		cout << endl;
 	}
 
 };

@@ -22,7 +22,7 @@
     <VCProjectVersion>16.0</VCProjectVersion>
     <ProjectGuid>{48C956C5-ED86-4D72-9AF7-D5931F6517FA}</ProjectGuid>
     <Keyword>Win32Proj</Keyword>
-    <RootNamespace>LInkedList</RootNamespace>
+    <RootNamespace>LinkedList</RootNamespace>
     <WindowsTargetPlatformVersion>10.0</WindowsTargetPlatformVersion>
     <ProjectName>List</ProjectName>
   </PropertyGroup>

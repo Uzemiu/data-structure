@@ -22,7 +22,7 @@
     <VCProjectVersion>16.0</VCProjectVersion>
     <ProjectGuid>{95259D9B-311E-4D74-8B77-B4C500D3310B}</ProjectGuid>
     <Keyword>Win32Proj</Keyword>
-    <RootNamespace>MyStack</RootNamespace>
+    <RootNamespace>MySTL</RootNamespace>
     <WindowsTargetPlatformVersion>10.0</WindowsTargetPlatformVersion>
     <ProjectName>MySTL</ProjectName>
   </PropertyGroup>

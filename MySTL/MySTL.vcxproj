@@ -158,6 +158,7 @@
     <ClCompile Include="BinarySearchTree.cpp" />
     <ClCompile Include="BinaryTree.cpp" />
     <ClCompile Include="Browser.cpp" />
+    <ClCompile Include="BTree.cpp" />
     <ClCompile Include="BuildableTree.cpp" />
     <ClCompile Include="CHashTable.cpp" />
     <ClCompile Include="Demonstration.cpp" />
@@ -183,6 +184,7 @@
     <ClInclude Include="BinarySearchTree.h" />
     <ClInclude Include="BinaryTree.h" />
     <ClInclude Include="Browser.h" />
+    <ClInclude Include="BTree.h" />
     <ClInclude Include="BuildableTree.h" />
     <ClInclude Include="CHashTable.h" />
     <ClInclude Include="AHashTable.h" />

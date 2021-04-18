@@ -135,6 +135,9 @@
     <ClCompile Include="Trie.cpp">
       <Filter>源文件\tree</Filter>
     </ClCompile>
+    <ClCompile Include="BTree.cpp">
+      <Filter>源文件\tree</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Polynomial.h">
@@ -198,6 +201,9 @@
       <Filter>头文件\tree</Filter>
     </ClInclude>
     <ClInclude Include="Trie.h">
+      <Filter>头文件\tree</Filter>
+    </ClInclude>
+    <ClInclude Include="BTree.h">
       <Filter>头文件\tree</Filter>
     </ClInclude>
   </ItemGroup>

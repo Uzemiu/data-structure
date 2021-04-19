@@ -12,7 +12,16 @@
 using namespace std;
 
 void test_btree() {
-	BTree<int, 4> bt;
+	BTree<char, 5> bt;
+	string str = "CNGAHEKQMFWLTZDPRXYS";
+	for (int i = 0; i < str.length(); i++) {
+		bt.insert(str[i]);
+	}
+	string str2 = "HTRE";
+	for (int i = 0; i < str2.length(); i++) {
+		bt.remove(str2[i]);
+	}
+	int j = 4;
 }
 
 int main() {
@@ -21,7 +30,6 @@ int main() {
 	Test test;
 	//test.	
 		test_btree();
-
 
 	_CrtDumpMemoryLeaks();
 	return 0;

@@ -15,7 +15,7 @@
 #include "BuildableTree.h"
 #include "AVL.cpp"
 #include "SplayTree.h"
-#include "BTree.h"
+#include "BTree.cpp"
 #include "Trie.h"
 #include "String.h"
 #include "Polynomial.h"

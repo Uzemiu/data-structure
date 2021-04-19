@@ -5,10 +5,9 @@
 
 using namespace std;
 
-const string left_bracket = "([{";
-const string right_bracket = ")]}";
-
 bool bracket_matching(string& str) {
+	const string left_bracket = "([{";
+	const string right_bracket = ")]}";
 	MyStack<int> s(100);
 	int len = str.length();
 	for (int i = 0; i < len; i++) {
@@ -91,7 +90,7 @@ void polishCalculator() {
 }
 
 string conversion(int dec, int radix) {
-	string chars = "0123456789ABCDEFGHUIKLMNOPQRSTUVWXYZ";
+	string chars = "0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZ";
 	MyStack<int> s;
 	do {
 		s.push(dec % radix);

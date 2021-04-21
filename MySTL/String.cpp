@@ -1,5 +1,5 @@
 #include "String.h"
-#include "LinkedList.cpp"
+#include "LinkedList.h"
 
 #include <string.h>
 

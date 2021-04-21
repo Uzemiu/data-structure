@@ -3,6 +3,9 @@
 #include <vector>
 #include <iomanip>
 #include <algorithm>
+
+#include "Test.h"
+
 using namespace std;
 
 template<class T>
@@ -47,6 +50,10 @@ void print(TreeNode<T>* head) {
 }
 
 int main() {
+	Test t;
+	int i = t.test();
+
+
 	TreeNode<int>* head = new TreeNode<int>(0);
 	TreeNode<int>* node = head;
 	for (int i = 1; i < 10; i++) {

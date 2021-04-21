@@ -4,23 +4,24 @@
 #include <string>
 #include <iomanip>
 
-#include "LinkedList.cpp"
-#include "LinkedStack.cpp"
-#include "SortableList.cpp"
-#include "Joseph.cpp"
-#include "AHashTable.cpp"
-#include "CHashTable.cpp"
-#include "BinaryTree.cpp"
-#include "BinarySearchTree.cpp"
+#include "LinkedList.h"
+#include "LinkedStack.h"
+#include "SortableList.h"
+#include "AHashTable.h"
+#include "CHashTable.h"
+#include "BinaryTree.h"
+#include "BinarySearchTree.h"
 #include "BuildableTree.h"
-#include "AVL.cpp"
+#include "AVL.h"
 #include "SplayTree.h"
-#include "BTree.cpp"
+#include "BTree.h"
 #include "Trie.h"
 #include "String.h"
+#include "Digraph.h"
+#include "Algorithm.h"
+#include "Joseph.cpp"
 #include "Polynomial.h"
 #include "Browser.h"
-#include "Algorithm.h"
 
 using namespace std;
 
@@ -114,7 +115,10 @@ public:
 
 	void test_binary_tree() {
 		BinaryTree<int> tree1;
-		for (int i = 1; i <= 10; i++) tree1.insert(i);
+		for (int i = 1; i <= 16; i++) {
+			tree1.insert(i);
+			cout << tree1.height() << endl;
+		}
 		BinaryTree<int> tree2(tree1);
 		BinaryTree<int> tree = tree2;
 		cout << "------------------------------" << endl;
@@ -266,6 +270,82 @@ public:
 			<< trie.search("abac") << endl
 			<< trie.search("bag") << endl;
 	}
+
+
+	void test_graph() {
+		Digraph<6> graph;
+		graph.add(3, 2);
+		graph.add(4, 2);
+		graph.add(2, 1);
+		graph.add(2, 5);
+		graph.add(1, 3);
+
+		LinkedList<int> res;
+		bool no_circle = graph.topo_sort(res);
+
+		Digraph<6> graph2;
+		int c1[8][3]{
+			{1,2,1},
+			{1,3,4},
+			{1,4,6},
+			{2,4,2},
+			{2,5,4},
+			{3,4,1},
+			{4,5,1},
+			{5,3,6}
+		};
+		int c2[10][3]{
+			{0,1,5},
+			{0,2,3},
+			{0,4,2},
+			{1,3,6},
+			{1,2,2},
+			{2,1,1},
+			{2,3,2},
+			{4,1,6},
+			{4,2,10},
+			{4,3,4}
+		};
+		for (int i = 0; i < 8; i++) {
+			graph2.add(c2[i][0], c2[i][1], c2[i][2]);
+		}
+		int dist[6];
+		graph2.shortest_path(5, dist);
+
+	}
+
+	void test_btree() {
+		BTree<char, 5> bt;
+		string str = "CNGAHEKQMFWLTZDPRXYS";
+		for (int i = 0; i < str.length(); i++) {
+			bt.insert(str[i]);
+		}
+		string str2 = "HTRE";
+		for (int i = 0; i < str2.length(); i++) {
+			bt.remove(str2[i]);
+		}
+		int j = 7;
+	}
+
+	void test_sort() {
+		int arr[14]{ 1,5,10,2,6,76,84,9,62,22,57,8,2,0 };
+		Algorithm::quick_sort(arr, 0, 13);
+
+		int arr2[14]{ 1,5,10,2,6,76,84,9,62,22,57,8,2,0 };
+		Algorithm::selection_sort(arr2, 0, 13);
+
+		int arr3[14]{ 1,5,10,2,6,76,84,9,62,22,57,8,2,0 };
+		Algorithm::insert_sort(arr3, 0, 13);
+
+		int arr4[14]{ 1,5,10,2,6,76,84,9,62,22,57,8,2,0 };
+		Algorithm::shell_sort(arr4, 14);
+
+		int arr5[14]{ 1,5,10,2,6,76,84,9,62,22,57,8,2,0 };
+		Algorithm::merge_sort(arr5, 14);
+
+		int i = 2;
+	}
+
 };
 
 #endif

@@ -1,4 +1,5 @@
 #include "Browser.h"
+#include "LinkedList.h"
 #include <string>
 
 void Browser::visit(const string& page) {

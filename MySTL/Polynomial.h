@@ -25,7 +25,7 @@ public:
 
 
 	static void introduction() {
-
+		cout << "This is Polynomial" << endl;
 	}
 
 	static void instructions() {
@@ -37,7 +37,7 @@ public:
 			<< "[q] Quit." << endl;
 	}
 
-	static bool do_command_(char command, LinkedList<Polynomial>& stack) {
+	static bool do_command(char command, LinkedList<Polynomial>& stack) {
 		Polynomial p, q, r;
 		switch (command) {
 		case'?':
@@ -102,7 +102,7 @@ public:
 		return true;
 	}
 
-	static char get_command_() {
+	static char get_command() {
 		char command;
 		bool waiting = true;
 		cout << "Select command and press <Enter>:";
@@ -124,7 +124,7 @@ public:
 		LinkedList<Polynomial> stack;
 		introduction();
 		instructions();
-		while (do_command_(get_command_(), stack));
+		while (do_command(get_command(), stack));
 	}
 
 };

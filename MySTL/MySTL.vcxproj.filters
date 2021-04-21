@@ -34,9 +34,6 @@
     <Filter Include="头文件\algorithm">
       <UniqueIdentifier>{672b775a-58cf-4752-b782-f8638594770a}</UniqueIdentifier>
     </Filter>
-    <Filter Include="源文件\algorithm">
-      <UniqueIdentifier>{aafed195-ed6a-45d2-bafa-a431bd7e6685}</UniqueIdentifier>
-    </Filter>
     <Filter Include="头文件\collection\v1">
       <UniqueIdentifier>{3fb7e9d3-8eca-46b6-b8ec-d01918472fd7}</UniqueIdentifier>
     </Filter>
@@ -52,17 +49,14 @@
     <Filter Include="头文件\collection\list">
       <UniqueIdentifier>{7fbee9a0-e10b-4d97-bee3-7e9581ac0991}</UniqueIdentifier>
     </Filter>
-    <Filter Include="源文件\collection\list">
-      <UniqueIdentifier>{4ba73871-dd24-44b0-9418-234ca9a0d15d}</UniqueIdentifier>
-    </Filter>
     <Filter Include="头文件\collection\table">
       <UniqueIdentifier>{539cf05c-c895-4783-9f19-edcdfc310e3d}</UniqueIdentifier>
     </Filter>
-    <Filter Include="源文件\collection\table">
-      <UniqueIdentifier>{650a4ee8-1b4e-41cf-af06-3dfa60c72096}</UniqueIdentifier>
-    </Filter>
     <Filter Include="头文件\test">
       <UniqueIdentifier>{376f5ac3-9501-43db-84ce-4199c1906c07}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="头文件\graph">
+      <UniqueIdentifier>{84b45ee5-77d1-44ae-b8d3-d38abafb1b25}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>
@@ -84,44 +78,11 @@
     <ClCompile Include="String.cpp">
       <Filter>源文件\string</Filter>
     </ClCompile>
-    <ClCompile Include="Algorithm.cpp">
-      <Filter>源文件\algorithm</Filter>
-    </ClCompile>
     <ClCompile Include="MyDeque.cpp">
       <Filter>源文件\collection\v1</Filter>
     </ClCompile>
     <ClCompile Include="MyStack.cpp">
       <Filter>源文件\collection\v1</Filter>
-    </ClCompile>
-    <ClCompile Include="LinkedList.cpp">
-      <Filter>源文件\collection\list</Filter>
-    </ClCompile>
-    <ClCompile Include="LinkedStack.cpp">
-      <Filter>源文件\collection\list</Filter>
-    </ClCompile>
-    <ClCompile Include="OrderedList.cpp">
-      <Filter>源文件\collection\list</Filter>
-    </ClCompile>
-    <ClCompile Include="SortableList.cpp">
-      <Filter>源文件\collection\list</Filter>
-    </ClCompile>
-    <ClCompile Include="AHashTable.cpp">
-      <Filter>源文件\collection\table</Filter>
-    </ClCompile>
-    <ClCompile Include="CHashTable.cpp">
-      <Filter>源文件\collection\table</Filter>
-    </ClCompile>
-    <ClCompile Include="BinaryTree.cpp">
-      <Filter>源文件\tree</Filter>
-    </ClCompile>
-    <ClCompile Include="BinarySearchTree.cpp">
-      <Filter>源文件\tree</Filter>
-    </ClCompile>
-    <ClCompile Include="AVL.cpp">
-      <Filter>源文件\tree</Filter>
-    </ClCompile>
-    <ClCompile Include="BuildableTree.cpp">
-      <Filter>源文件\tree</Filter>
     </ClCompile>
     <ClCompile Include="Browser.cpp">
       <Filter>源文件\impl</Filter>
@@ -129,13 +90,7 @@
     <ClCompile Include="Test.h">
       <Filter>头文件\test</Filter>
     </ClCompile>
-    <ClCompile Include="SplayTree.cpp">
-      <Filter>源文件\tree</Filter>
-    </ClCompile>
     <ClCompile Include="Trie.cpp">
-      <Filter>源文件\tree</Filter>
-    </ClCompile>
-    <ClCompile Include="BTree.cpp">
       <Filter>源文件\tree</Filter>
     </ClCompile>
   </ItemGroup>
@@ -205,6 +160,9 @@
     </ClInclude>
     <ClInclude Include="BTree.h">
       <Filter>头文件\tree</Filter>
+    </ClInclude>
+    <ClInclude Include="Digraph.h">
+      <Filter>头文件\graph</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

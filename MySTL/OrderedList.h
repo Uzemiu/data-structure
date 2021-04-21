@@ -1,12 +1,8 @@
 #pragma once
 #include "List.h"
 
-struct Record {
-
-};
-
-class OrderedList : public List<Record> {
-
+template<class T>
+class OrderedList{
 public:
 	OrderedList();
 	void insert();

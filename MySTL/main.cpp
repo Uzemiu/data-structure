@@ -11,25 +11,13 @@
 
 using namespace std;
 
-void test_btree() {
-	BTree<char, 5> bt;
-	string str = "CNGAHEKQMFWLTZDPRXYS";
-	for (int i = 0; i < str.length(); i++) {
-		bt.insert(str[i]);
-	}
-	string str2 = "HTRE";
-	for (int i = 0; i < str2.length(); i++) {
-		bt.remove(str2[i]);
-	}
-	int j = 4;
-}
-
 int main() {
 	_CrtSetDbgFlag(_CRTDBG_ALLOC_MEM_DF | _CRTDBG_LEAK_CHECK_DF);
+	
+	Test test; test.test_binary_tree();
 
-	Test test;
-	//test.	
-		test_btree();
+	int z = 1;
+	
 
 	_CrtDumpMemoryLeaks();
 	return 0;

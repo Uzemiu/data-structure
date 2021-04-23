@@ -164,5 +164,8 @@
     <ClInclude Include="Digraph.h">
       <Filter>头文件\graph</Filter>
     </ClInclude>
+    <ClInclude Include="RBTree.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
   </ItemGroup>
 </Project>

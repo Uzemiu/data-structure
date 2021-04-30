@@ -3,6 +3,8 @@
 #include <iostream>
 #include <string>
 #include <iomanip>
+#include <random>
+#include <ctime>
 
 #include "LinkedList.h"
 #include "LinkedStack.h"
@@ -328,20 +330,45 @@ public:
 	}
 
 	void test_sort() {
-		int arr[14]{ 1,5,10,2,6,76,84,9,62,22,57,8,2,0 };
-		Algorithm::quick_sort(arr, 0, 13);
+		int n = 10'000'000;
+		clock_t start, end;
+		random_device rd;
+		mt19937 rng(rd());
+		int* arr0 = new int[n];
+		for (int i = 0; i < n; i++) arr0[i] = i;
 
-		int arr2[14]{ 1,5,10,2,6,76,84,9,62,22,57,8,2,0 };
+		start = clock();
+		shuffle(arr0, arr0 + n, rng);
+		Algorithm::quick_sort(arr0, 0, n -1 );
+		end = clock();
+		cout << "QuickSort: "
+			<< (double)(end - start) / CLOCKS_PER_SEC
+			<< "s" << endl;
+
+		start = clock();
+		shuffle(arr0, arr0 + n, rng);
+		sort(arr0, arr0 + n);
+		end = clock();
+		cout << "SystemSort: "
+			<< (double)(end - start) / CLOCKS_PER_SEC
+			<< "s" << endl;
+
+		/*int arr2[14]{ 1,5,10,2,6,76,84,9,62,22,57,8,2,0 };
 		Algorithm::selection_sort(arr2, 0, 13);
 
 		int arr3[14]{ 1,5,10,2,6,76,84,9,62,22,57,8,2,0 };
 		Algorithm::insert_sort(arr3, 0, 13);
 
 		int arr4[14]{ 1,5,10,2,6,76,84,9,62,22,57,8,2,0 };
-		Algorithm::shell_sort(arr4, 14);
+		Algorithm::shell_sort(arr4, 14);*/
 
-		int arr5[14]{ 1,5,10,2,6,76,84,9,62,22,57,8,2,0 };
-		Algorithm::merge_sort(arr5, 14);
+		start = clock();
+		shuffle(arr0, arr0 + n, rng);
+		Algorithm::merge_sort(arr0, n);
+		end = clock();
+		cout << "MergeSort: " 
+			<< (double)(end - start) / CLOCKS_PER_SEC 
+			<< "s" << endl;
 
 		int i = 2;
 	}

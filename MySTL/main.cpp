@@ -14,7 +14,7 @@ using namespace std;
 int main() {
 	_CrtSetDbgFlag(_CRTDBG_ALLOC_MEM_DF | _CRTDBG_LEAK_CHECK_DF);
 	
-	Test test; test.test_binary_tree();
+	Test test; test.test_sort();
 
 	int z = 1;
 	

@@ -9,17 +9,43 @@
 
 #include "Test.h";
 
+//#include "LinkedList.h"
+
 using namespace std;
+
+
+void test_ordered_list() {
+	vector<int> eles{ 7,9,4,1,6,2,0,3,5,10,8 };
+	OrderedList<int> list;
+	for (int i = 0; i < eles.size(); i++) {
+		list.insert(eles[i]);
+	}
+	cout << list << endl;
+
+	for (int i = 0; i < 5; i++) {
+		list.replace(i, i + 10);
+		cout << list << endl;
+	
+	}
+
+}
 
 int main() {
 	_CrtSetDbgFlag(_CRTDBG_ALLOC_MEM_DF | _CRTDBG_LEAK_CHECK_DF);
 	
-	Test test; test.test_sort();
 
-	int z = 1;
+	//Test test; 
+	//test.test_hashtable_2();
+
+
+	test_ordered_list();
+
+
+	int z = 4;
 	
-
 	_CrtDumpMemoryLeaks();
+
+	system("pause");
 	return 0;
 }
 

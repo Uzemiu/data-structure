@@ -11,6 +11,16 @@ class SortableList : public LinkedList<T> {
 public:
 	void radix_sort();
 
+	void insertion_sort();
+
+	void selection_sort();
+
+	void shell_sort();
+
+	void quick_sort();
+
+	void merge_sort();
+
 private:
 	int alphabetic_order(char c);
 

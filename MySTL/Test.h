@@ -7,6 +7,7 @@
 #include <ctime>
 
 #include "LinkedList.h"
+#include "OrderedList.h"
 #include "LinkedStack.h"
 #include "SortableList.h"
 #include "AHashTable.h"
@@ -29,6 +30,63 @@ using namespace std;
 
 class Test {
 public:
+
+
+
+	void print(LinkedList<int>& list) {
+		for (int i = 0; i < list.size(); i++) {
+			cout << list[i] << " ";
+		}
+	}
+
+	void test_linked_list() {
+		LinkedList<int> list;
+		for (int i = 0; i < 10; i++) {
+			list.insert(i, i + 1);
+		}
+		cout << "After insert 10 elements:" << endl;
+		print(list);
+		cout << endl;
+
+		cout << "list.insert(0, -1)" << endl
+			<< "list.insert(5,-5)" << endl
+			<< "list.insert(1,-2)" << endl;
+		list.insert(0, -1);
+		list.insert(5, -5);
+		list.insert(1, -2);
+		print(list);
+		cout << endl;
+
+		cout << "list.remove(2)" << endl;
+		list.remove(2);
+		print(list);
+		cout << endl;
+
+		cout << "list.remove(0)" << endl;
+		list.remove(0);
+		print(list);
+		cout << endl;
+
+		cout << "list.remove(2)" << endl;
+		list.remove(2);
+		print(list);
+		cout << endl;
+
+		cout << "list2(list)" << endl;
+		LinkedList<int> list2(list);
+		print(list2);
+		cout << endl;
+
+		cout << "list[i]*=2" << endl;
+		for (int i = 0; i < list.size(); i++) {
+			list[i] *= 2;
+		}
+		cout << "list3(list)" << endl;
+		LinkedList<int> list3 = list;
+		print(list3);
+		cout << endl;
+	}
+
 	void test_radix_sort() {
 		SortableList<string> list;
 		list.push("rat");
@@ -214,7 +272,6 @@ public:
 							   });
 	}
 
-
 	void test_splay_tree() {
 		SplayTree<int> st;
 		st.insert(13);
@@ -247,7 +304,6 @@ public:
 		cout << endl;
 	}
 
-
 	void test_trie() {
 		Trie trie;
 		trie.insert("a");
@@ -272,7 +328,6 @@ public:
 			<< trie.search("abac") << endl
 			<< trie.search("bag") << endl;
 	}
-
 
 	void test_graph() {
 		Digraph<6> graph;
@@ -339,7 +394,7 @@ public:
 
 		start = clock();
 		shuffle(arr0, arr0 + n, rng);
-		Algorithm::quick_sort(arr0, 0, n -1 );
+		Algorithm::quick_sort(arr0, n);
 		end = clock();
 		cout << "QuickSort: "
 			<< (double)(end - start) / CLOCKS_PER_SEC
@@ -354,10 +409,10 @@ public:
 			<< "s" << endl;
 
 		/*int arr2[14]{ 1,5,10,2,6,76,84,9,62,22,57,8,2,0 };
-		Algorithm::selection_sort(arr2, 0, 13);
+		Algorithm::selection_sort(arr2, 14);
 
 		int arr3[14]{ 1,5,10,2,6,76,84,9,62,22,57,8,2,0 };
-		Algorithm::insert_sort(arr3, 0, 13);
+		Algorithm::insert_sort(arr3, 14);
 
 		int arr4[14]{ 1,5,10,2,6,76,84,9,62,22,57,8,2,0 };
 		Algorithm::shell_sort(arr4, 14);*/

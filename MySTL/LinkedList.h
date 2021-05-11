@@ -1,5 +1,8 @@
 #pragma once
 #include "List.h"
+#include <iostream>
+
+using namespace std;
 
 template <class T>
 class LinkedList: List<T>{
@@ -9,6 +12,9 @@ public:
 	~LinkedList();
 	const LinkedList<T>& operator=(const LinkedList<T> &list);
 	T& operator[](int i);
+
+	template<class T>
+	friend ostream& operator<<(ostream& out, const LinkedList<T>& list);
 
 	void push(const T &ele);
 	T pop();
@@ -28,7 +34,7 @@ public:
 	void replace(int i, const T& ele);
 
 	template<class Fun>
-	void for_each(Fun fun);
+	void for_each(Fun fun) const;
 
 	T* to_array();
 
@@ -51,6 +57,10 @@ protected:
 	Node<T>* head;
 	size_t _size;
 
+	Node<T>* last_node;
+	size_t last_pos;
+
+	void set_position(int i);
 	void insert(int i, T ele, bool last);
 	T remove(Node<T>* node);
 };
@@ -59,12 +69,16 @@ template<class T>
 LinkedList<T>::LinkedList() {
 	_size = 0;
 	head = nullptr;
+	last_node = head;
+	last_pos = 0;
 }
 
 template<class T>
 LinkedList<T>::LinkedList(const LinkedList<T>& list) {
 	_size = 0;
 	head = nullptr;
+	last_node = head;
+	last_pos = 0;
 	Node<T>* node = list.head;
 	if (node) {
 		do {
@@ -101,6 +115,15 @@ template<class T>
 T& LinkedList<T>::operator[](int i) {
 	return get(i);
 }
+
+template<class T>
+ostream& operator<<(ostream& out, const LinkedList<T>& list) {
+	list.for_each([&out](T& ele) {
+		out << ele << " ";
+		});
+	return out;
+}
+
 
 template<class T>
 void LinkedList<T>::push(const T& ele) {
@@ -176,12 +199,15 @@ int LinkedList<T>::find(const T& ele) {
 
 template<class T>
 T& LinkedList<T>::get(int index) {
-	if (empty() || index < 0) throw "Index out of bound";
+	/*
 	Node<T>* node = head;
 	for (int i = 0; i < index; i++) {
 		node = node->next;
 	}
 	return node->ele;
+	*/
+	set_position(index);
+	return last_node->ele;
 }
 
 template<class T>
@@ -191,14 +217,15 @@ void LinkedList<T>::insert(int i, const T& ele) {
 
 template<class T>
 T LinkedList<T>::remove(int i) {
-	if (empty()) {
-		throw "Empty list";
+	if (i > 0) {
+		set_position(i - 1);
+		return remove(last_node->next);
+	} else {
+		T t = remove(head);
+		last_pos = 0;
+		last_node = head;
+		return t;
 	}
-	Node<T>* node = head;
-	for (int j = 0; j < i; j++) {
-		node = node->next;
-	}
-	return remove(node);
 }
 
 template<class T>
@@ -212,7 +239,7 @@ void LinkedList<T>::replace(int i, const T& ele) {
 
 template<class T>
 template<class Fun>
-void LinkedList<T>::for_each(Fun fun) {
+void LinkedList<T>::for_each(Fun fun) const {
 	if (empty()) return;
 	Node<T>* node = head;
 	do {
@@ -250,19 +277,39 @@ void LinkedList<T>::clear() {
 		delete tmp;
 	}
 	head = nullptr;
+	last_node = nullptr;
+	last_pos = 0;
+}
+
+template<class T>
+void LinkedList<T>::set_position(int index) {
+	if (empty() || index < 0) throw "Index out of bound";
+	if (!last_node) {
+		last_node = head;
+	}
+	index %= _size;
+	if (index >= last_pos) {
+		for (; last_pos < index; last_pos++) {
+			last_node = last_node->next;
+		}
+	} else {
+		for (; last_pos > index; last_pos--) {
+			last_node = last_node->prev;
+		}
+	}
 }
 
 template<class T>
 void LinkedList<T>::insert(int i, T ele, bool last) {
 	Node<T>* next = head;
 	Node<T>* newN = new Node<T>(ele);
-	if (next) {
-		if (i > _size) {
-			i = _size;
+	if (head) {
+		if (i > 0) {
+			set_position(i-1);
+			next = last_node->next;
+			//last_pos++;
 		}
-		for (int j = 0; j < i; j++) {
-			next = next->next;
-		}
+
 		Node<T>* prev = next->prev;
 		newN->prev = prev;
 		newN->next = next;
@@ -271,12 +318,15 @@ void LinkedList<T>::insert(int i, T ele, bool last) {
 
 		if (!last && i == 0) {
 			head = newN;
+			last_node = head;
+			last_pos = 0;
 		}
 
 	} else {
 		head = newN;
 		head->next = head;
 		head->prev = head;
+		last_node = head;
 	}
 	_size++;
 }
@@ -291,9 +341,9 @@ T LinkedList<T>::remove(Node<T>* node) {
 		head = head->next;
 	}
 	delete node;
-	_size--;
-	if (_size == 0) {
+	if (--_size == 0) {
 		head = nullptr;
+		last_node = head;
 	}
 	return ele;
 }

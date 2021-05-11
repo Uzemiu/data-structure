@@ -9,19 +9,19 @@ using namespace std;
 class Algorithm {
 public:
 	template<class T>
-	static void insert_sort(T* arr, int from, int to);
+	static void insert_sort(T* arr, int len);
 
 	template<class T>
-	static void quick_sort(T *arr, int from, int to);
+	static void quick_sort(T* arr, int len);
 
 	template<class T>
-	static void selection_sort(T* arr, int from, int to);
+	static void selection_sort(T* arr, int len);
 
 	template<class T>
 	static void shell_sort(T* arr, int len);
 
 	template<class T>
-	static void heap_sort(T* arr, int to);
+	static void heap_sort(T* arr, int len);
 
 	template<class T>
 	static void merge_sort(T* arr, int len);
@@ -32,6 +32,8 @@ private:
 	// for quick sort
 	template<class T>
 	static T median3(T* arr, int from, int to);
+	template<class T>
+	static void quick_sort(T* arr, int from, int to);
 
 	// for heap sort
 	template<class T>
@@ -50,8 +52,8 @@ private:
 };
 
 template<class T>
-void Algorithm::insert_sort(T* arr, int from, int to) {
-	for (int i = from + 1; i <= to; i++) {
+void Algorithm::insert_sort(T* arr, int len) {
+	for (int i = 1; i < len; i++) {
 		T tmp = arr[i];
 		int j = i;
 		for (; j > 0 && tmp < arr[j - 1]; j--) {
@@ -59,6 +61,11 @@ void Algorithm::insert_sort(T* arr, int from, int to) {
 		}
 		arr[j] = tmp;
 	}
+}
+
+template<class T>
+inline void Algorithm::quick_sort(T* arr, int len) {
+	Algorithm::quick_sort(T * arr, 0, len - 1);
 }
 
 template<class T>
@@ -82,10 +89,10 @@ void Algorithm::quick_sort(T* arr, int from, int to) {
 }
 
 template<class T>
-void Algorithm::selection_sort(T* arr, int from, int to) {
-	for (int i = from; i <= to; i++) {
+void Algorithm::selection_sort(T* arr, int len) {
+	for (int i = 0; i < len; i++) {
 		int min_ = i;
-		for (int j = i + 1; j <= to; j++) {
+		for (int j = i + 1; j < len; j++) {
 			if (arr[j] < arr[min_]) {
 				min_ = j;
 			}

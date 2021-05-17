@@ -4,9 +4,12 @@
 #include <vector>
 using namespace std;
 
+enum Color { RED, BLACK };
+
 template<class T>
 struct TreeNode {
 	T ele;
+	Color color;
 	TreeNode<T>* left;
 	TreeNode<T>* right;
 	TreeNode(T ele) : TreeNode::TreeNode(ele, NULL, NULL) {}

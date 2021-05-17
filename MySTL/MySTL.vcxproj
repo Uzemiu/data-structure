@@ -160,6 +160,7 @@
     <ClCompile Include="MyDeque.cpp" />
     <ClCompile Include="MyStack.cpp" />
     <ClCompile Include="Polynomial.cpp" />
+    <ClCompile Include="Random.cpp" />
     <ClCompile Include="StackTest.cpp" />
     <ClCompile Include="String.cpp" />
     <ClCompile Include="Test.h" />
@@ -185,6 +186,7 @@
     <ClInclude Include="MyStack.h" />
     <ClInclude Include="OrderedList.h" />
     <ClInclude Include="Polynomial.h" />
+    <ClInclude Include="Random.h" />
     <ClInclude Include="RBTree.h" />
     <ClInclude Include="SortableList.h" />
     <ClInclude Include="SplayTree.h" />

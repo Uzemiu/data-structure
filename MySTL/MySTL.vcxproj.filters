@@ -58,6 +58,9 @@
     <Filter Include="头文件\graph">
       <UniqueIdentifier>{84b45ee5-77d1-44ae-b8d3-d38abafb1b25}</UniqueIdentifier>
     </Filter>
+    <Filter Include="源文件\algorithm">
+      <UniqueIdentifier>{063458a9-53e4-4c2b-8240-41175534e023}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="main.cpp">
@@ -92,6 +95,9 @@
     </ClCompile>
     <ClCompile Include="Trie.cpp">
       <Filter>源文件\tree</Filter>
+    </ClCompile>
+    <ClCompile Include="Random.cpp">
+      <Filter>源文件\algorithm</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -166,6 +172,9 @@
     </ClInclude>
     <ClInclude Include="RBTree.h">
       <Filter>头文件\tree</Filter>
+    </ClInclude>
+    <ClInclude Include="Random.h">
+      <Filter>头文件\algorithm</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

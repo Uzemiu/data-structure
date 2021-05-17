@@ -14,6 +14,7 @@
 #include "CHashTable.h"
 #include "BinaryTree.h"
 #include "BinarySearchTree.h"
+#include "RBTree.h"
 #include "BuildableTree.h"
 #include "AVL.h"
 #include "SplayTree.h"
@@ -31,7 +32,21 @@ using namespace std;
 class Test {
 public:
 
+	void test_ordered_list() {
+		vector<int> eles{ 7,9,4,1,6,2,0,3,5,10,8 };
+		OrderedList<int> list;
+		for (int i = 0; i < eles.size(); i++) {
+			list.insert(eles[i]);
+		}
+		cout << list << endl;
 
+		for (int i = 0; i < 5; i++) {
+			list.replace(i, i + 10);
+			cout << list << endl;
+
+		}
+
+	}
 
 	void print(LinkedList<int>& list) {
 		for (int i = 0; i < list.size(); i++) {
@@ -385,7 +400,7 @@ public:
 	}
 
 	void test_sort() {
-		int n = 10'000'000;
+		int n = 10'000;
 		clock_t start, end;
 		random_device rd;
 		mt19937 rng(rd());
@@ -395,6 +410,7 @@ public:
 		start = clock();
 		shuffle(arr0, arr0 + n, rng);
 		Algorithm::quick_sort(arr0, n);
+
 		end = clock();
 		cout << "QuickSort: "
 			<< (double)(end - start) / CLOCKS_PER_SEC
@@ -425,7 +441,7 @@ public:
 			<< (double)(end - start) / CLOCKS_PER_SEC 
 			<< "s" << endl;
 
-		int i = 2;
+		delete[] arr0;
 	}
 
 };

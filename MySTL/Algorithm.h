@@ -9,7 +9,7 @@ using namespace std;
 class Algorithm {
 public:
 	template<class T>
-	static void insert_sort(T* arr, int len);
+	static void insertion_sort(T* arr, int len);
 
 	template<class T>
 	static void quick_sort(T* arr, int len);
@@ -25,8 +25,6 @@ public:
 
 	template<class T>
 	static void merge_sort(T* arr, int len);
-
-	static void radix_sort(string* arr, int to);
 
 private:
 	// for quick sort
@@ -45,14 +43,10 @@ private:
 	template<class T>
 	static void merge(T* arr, int low, int mid, int high);
 
-	// for radix sort
-	const static int MAX_CHAR = 28;
-	static int alphabetic_order(char c);
-	static void rethread(LinkedList<string> bucket[28]);
 };
 
 template<class T>
-void Algorithm::insert_sort(T* arr, int len) {
+void Algorithm::insertion_sort(T* arr, int len) {
 	for (int i = 1; i < len; i++) {
 		T tmp = arr[i];
 		int j = i;
@@ -65,12 +59,12 @@ void Algorithm::insert_sort(T* arr, int len) {
 
 template<class T>
 inline void Algorithm::quick_sort(T* arr, int len) {
-	Algorithm::quick_sort(T * arr, 0, len - 1);
+	Algorithm::quick_sort(arr, 0, len - 1);
 }
 
 template<class T>
 void Algorithm::quick_sort(T* arr, int from, int to) {
-	if (from + 10 <= to) {
+	if (from + 10 > to) {
 		T pivot = median3(arr, from, to);
 		int i = from;
 		int j = to - 1;
@@ -84,7 +78,7 @@ void Algorithm::quick_sort(T* arr, int from, int to) {
 		quick_sort(arr, from, i - 1);
 		quick_sort(arr, i + 1, to);
 	} else {
-		insert_sort(arr, from, to);
+		insertion_sort(arr+from, to-from+1);
 	}
 }
 

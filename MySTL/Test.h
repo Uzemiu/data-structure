@@ -37,13 +37,14 @@ public:
 		OrderedList<int> list;
 		for (int i = 0; i < eles.size(); i++) {
 			list.insert(eles[i]);
+			cout << "insert(" << eles[i] << ")" << endl;
 		}
 		cout << list << endl;
 
 		for (int i = 0; i < 5; i++) {
 			list.replace(i, i + 10);
+			cout << "replace(" << i << "," << (i + 10) << ")" << endl;
 			cout << list << endl;
-
 		}
 
 	}
@@ -342,6 +343,22 @@ public:
 		cout << trie.search("abaca") << endl
 			<< trie.search("abac") << endl
 			<< trie.search("bag") << endl;
+	}
+
+	void test_rbtree() {
+		RBTree<int> tree;
+		vector<int> to = { 11,2,14,1,7,15,5,8,4 };
+		vector<int> rmv = { 1,7 };
+		for (int i = 0; i < to.size(); i++) {
+			tree.insert(to[i]);
+		}
+
+		tree.remove(1);
+		tree.remove(7);
+		tree.remove(-1);
+		tree.remove(11);
+
+		int j = 4;
 	}
 
 	void test_graph() {

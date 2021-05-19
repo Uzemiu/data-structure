@@ -13,6 +13,7 @@ struct TreeNode {
 
 	TreeNode<T>* left;
 	TreeNode<T>* right;
+	TreeNode() {}
 	TreeNode(T ele) : TreeNode::TreeNode(ele, NULL, NULL) {}
 	TreeNode(T ele, TreeNode<T>* left, TreeNode<T>* right) 
 		:ele(ele), left(left), right(right) {}
@@ -20,7 +21,7 @@ struct TreeNode {
 	virtual Color get_color() { return RED; }
 	virtual void set_color(Color color) {}
 	virtual TreeNode<T>* get_parent() { return NULL; }
-	virtual void set_parent() {}
+	virtual void set_parent(TreeNode<T>* parent) {}
 };
 
 template<class T>

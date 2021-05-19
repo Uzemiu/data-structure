@@ -5,16 +5,21 @@
 
 using namespace std;
 
-enum RBStatus {
-	DUPLICATED, SUCCESS, 
-	NODE_RED, RIGHT_RED, LEFT_RED, 
-	NOT_FOUND, DEL_NODE, DEL_BLACK, DEL_RED, DUAL_BLACK};
-
 template<class T>
 class RBTree: BinarySearchTree<T> {
 public:
+
+	RBTree(){
+		NIL = new Node<T>();
+		NIL->left = NIL->right = NIL->parent = NULL;
+		NIL->color = BLACK;
+		root = NIL;
+		_size = 0;
+	}
+
 	bool insert(const T& data);
 	bool remove(const T& data);
+	void clear();
 
 protected:
 
@@ -22,11 +27,11 @@ protected:
 	struct Node: public TreeNode<T> {
 
 		TreeNode<T>* parent;
-
+		Node() {}
 		Node(T ele):Node(ele, RED) {}
-		Node(T ele, Color color) : 
-			TreeNode<T>::TreeNode(ele, NULL, NULL) {
+		Node(T ele, Color color) :TreeNode<T>::TreeNode(ele, NULL, NULL) {
 			this->color = color;
+			this->parent = NULL;
 		}
 		Color get_color() {
 			return this->color;
@@ -46,256 +51,289 @@ protected:
 	using BinaryTree<T>::_size;
 
 private:
-	RBStatus insert(TreeNode<T>* &node, const T& data);
 
-	RBStatus modify_left(TreeNode<T>* &node, RBStatus child_status);
-	RBStatus modify_right(TreeNode<T>* &node, RBStatus child_status);
+	Node<T>* NIL;
 
-	RBStatus flip_color(TreeNode<T>* node);
-	RBStatus flip_color_single(TreeNode<T>* node);
+	void remove(TreeNode<T>* node);
 
-	RBStatus rotate_right(TreeNode<T>* &k2, bool flip_color = true);
-	RBStatus double_rotate_right(TreeNode<T>* &k3);
-	RBStatus rotate_left(TreeNode<T>* &k2, bool flip_color = true);
-	RBStatus double_rotate_left(TreeNode<T>* &k3);
+	void insert_fixup(TreeNode<T>* z);
+	void remove_fixup(TreeNode<T>* z);
 
-	RBStatus remove(TreeNode<T>*& node, const T& data);
+	void right_rotate(TreeNode<T>* x);
+	void left_rotate(TreeNode<T>* x);
 
-	RBStatus del_fix_left(TreeNode<T>* &node, RBStatus child_status);
-	RBStatus del_fix_right(TreeNode<T>* &node, RBStatus child_status);
-
-	Color get_node_color(TreeNode<T>* node);
-	void set_node_color(TreeNode<T>* node, Color color);
+	TreeNode<T>* find(const T& data);
+	TreeNode<T>* successor(TreeNode<T>* node);
 };
 
 template<class T>
 inline bool RBTree<T>::insert(const T& data) {
-	Node<T>*& _root = (Node<T>*&)root;
-	RBStatus status = insert(root, data);
-	switch (status) {
-	case NODE_RED:
-		_root->color = BLACK;
-	case SUCCESS:
-		return true;
-	case RIGHT_RED:
-	case LEFT_RED:
-		cout << "Error detected" << endl;
-	default:
-		// duplicated 
-		return false;
+	Node<T>* newNode = new Node<T>(data, RED);
+	newNode->left = newNode->right = newNode->parent = NIL;
+
+	TreeNode<T>* node = root;
+	TreeNode<T>* parent = NIL;
+
+	while (node != NIL) {
+		parent = node;
+		if (data < node->ele) {
+			node = node->left;
+		} else if (data > node->ele) {
+			node = node->right;
+		} else {
+			return false;
+		}
 	}
+
+	newNode->set_parent(parent);
+
+	if (parent == NIL) {
+		// root is NULL
+		root = newNode;
+	} else {
+		if (newNode->ele < parent->ele) {
+			parent->left = newNode;
+		} else {
+			parent->right = newNode;
+		}
+	}
+
+	insert_fixup(newNode);
+
+	return true;
 }
 
 template<class T>
 inline bool RBTree<T>::remove(const T& data) {
-	return false;
+	TreeNode<T>* node = find(data);
+	if (node == NIL) {
+		return false;
+	}
+	remove(node);
+	return true;
 }
 
 template<class T>
-inline RBStatus RBTree<T>::insert(TreeNode<T>* &node, const T& data) {
-	if (node == NULL) {
-		node = new Node<T>(data);
-		return NODE_RED;
-	} else if(data == node->ele){
-		return DUPLICATED;
-	} else if (data < node->ele) {
-		RBStatus child_status = insert(node->left, data);
-		return modify_left(node, child_status);
+inline void RBTree<T>::clear() {
+}
+
+template<class T>
+inline void RBTree<T>::remove(TreeNode<T>* z) {
+	TreeNode<T>* x = NIL; // 删除节点后补位的子节点
+	TreeNode<T>* y; // 待删除节点
+
+	if (z->left == NIL || z->right == NIL) {
+		y = z;
 	} else {
-		RBStatus child_status = insert(node->right, data);
-		return modify_right(node, child_status);
+		// z有左右子树情况，与后继节点交换元素并删除后继节点(1)
+		y = successor(z);
 	}
-}
 
-template<class T>
-inline RBStatus RBTree<T>::modify_left(TreeNode<T>* &node, RBStatus child_status) {
-	Node<T>* aunt = (Node<T>*)node->right;
-	Color aunt_color = get_node_color(aunt);
-	switch (child_status) {
-	case NODE_RED:
-		return (get_node_color(node) == RED) ? LEFT_RED : SUCCESS;
-	case LEFT_RED:
-		return (aunt_color == BLACK) ? rotate_right(node) :flip_color(node);
-	case RIGHT_RED:
-		return (aunt_color == BLACK) ? double_rotate_right(node) : flip_color(node);
-	default:
-		// child_status == SUCCESS
-		return SUCCESS;
-	}
-}
-
-template<class T>
-inline RBStatus RBTree<T>::modify_right(TreeNode<T>* &node, RBStatus child_status) {
-	Node<T>* aunt = (Node<T>*)node->left;
-	Color aunt_color = get_node_color(aunt);
-	switch (child_status) {
-	case NODE_RED:
-		return (get_node_color(node) == RED) ? RIGHT_RED : SUCCESS;
-	case RIGHT_RED:
-		return (aunt_color == BLACK) ? rotate_left(node) : flip_color(node);
-	case LEFT_RED:
-		return (aunt_color == BLACK) ? double_rotate_left(node) : flip_color(node);
-	default:
-		// child_status == SUCCESS
-		return SUCCESS;
-	}
-}
-
-
-template<class T>
-inline RBStatus RBTree<T>::flip_color(TreeNode<T>* _node) {
-	flip_color_single(_node->right);
-	flip_color_single(_node->left);
-	return flip_color_single(_node);
-}
-
-
-template<class T>
-inline RBStatus RBTree<T>::flip_color_single(TreeNode<T>* node) {
-	if (node == NULL) {
-		return SUCCESS;
-	}
-	if (node->get_color() == RED) {
-		node->set_color(BLACK);
-		return SUCCESS;
+	// 单子树或叶节点情况
+	if (y->left != NIL) {
+		x = y->left;
 	} else {
-		node->set_color(RED);
-		return NODE_RED;
+		x = y->right;
 	}
-}
-
-template<class T>
-inline RBStatus RBTree<T>::rotate_right(TreeNode<T>* &k2, bool flip_color) {
-	TreeNode<T>* k1 = k2->left;
-	k2->left = k1->right;
-	k1->right = k2;
-	k2 = k1;
-	if (flip_color) {
-		flip_color_single(k2->right);
-		return flip_color_single(k2);
+	x->set_parent(y->get_parent());
+	if (y->get_parent() == NIL) {
+		root = x;
 	} else {
-		return SUCCESS;
-	}
-}
-
-template<class T>
-inline RBStatus RBTree<T>::double_rotate_right(TreeNode<T>* &k3) {
-	rotate_left(k3->left);
-	rotate_right(k3);
-	flip_color_single(k3->left);
-	return flip_color_single(k3);
-}
-
-template<class T>
-inline RBStatus RBTree<T>::rotate_left(TreeNode<T>* &k2, bool flip_color) {
-	TreeNode<T>* k1 = k2->right;
-	k2->right = k1->left;
-	k1->left = k2;
-	k2 = k1;
-	if (flip_color) {
-		flip_color_single(k2->left);
-		return flip_color_single(k2);
-	} else {
-		return SUCCESS;
-	}
-}
-
-template<class T>
-inline RBStatus RBTree<T>::double_rotate_left(TreeNode<T>* &k3) {
-	rotate_right(k3->right);
-	rotate_left(k3);
-	flip_color_single(k3->right);
-	return flip_color_single(k3);
-}
-
-template<class T>
-inline RBStatus RBTree<T>::remove(TreeNode<T>*& node, const T& data) {
-	if (node == NULL) {
-		return NOT_FOUND;
-	} else if (data < node->ele) {
-		RBStatus status = remove(node->left, data);
-		return del_fix_left(node, status);
-	} else if (data > node->ele){
-		RBStatus status = remove(node->right, data);
-		return del_fix_right(node, status);
-	} else if (node->left && node->right) {
-		// 两个子节点
-		TreeNode<T>* tmp = node->right;
-		while (tmp->left) tmp = tmp->left; // findMin
-		node->ele = tmp->ele;
-
-		RBStatus status = remove(node->right, node->ele);
-		return del_fix_right(node, status);
-	} else {
-		// 两个以下子节点
-		TreeNode<T>* origin = node;
-		node = (node->left ? node->left : node->right);
-		RBStatus res = origin->color == RED ? DEL_RED : DEL_BLACK;
-		delete origin;
-		return res;
-	}
-}
-
-
-template<class T>
-inline RBStatus RBTree<T>::del_fix_left(TreeNode<T>*& node, RBStatus child_status) {
-	TreeNode<T>* brother = node->right;
-	Color node_color = get_node_color(node);
-	Color brother_color = get_node_color(brother);
-	Color left_child_color = get_node_color(brother->left);
-	Color right_child_color = get_node_color(brother->right);
-
-	switch (child_status) {
-	case DEL_BLACK:
-		return DEL_NODE;
-	case DEL_NODE:
-		if (get_node_color(brother) == RED) {
-			// swap color
-			node->set_color(brother_color);
-			brother->set_color(node_color);
-
-			// 转化为兄弟节点黑色情况
-			rotate_left(node, false);
-			return del_fix_left(node->left, DEL_NODE);
-
-		} else if (left_child_color == BLACK && right_child_color == BLACK) {
-			// 双子节点黑色
-			brother->color = RED;
-			return DEL_NODE;
-		} else if (left_child_color == RED) {
-			// swap color
-			brother->left->color = brother_color; // TODO
-			brother->set_color(left_child_color);
-
-			// 转化为右节点红色情况
-			rotate_right(node->right, false);
-			return del_fix_left(node->right, DEL_NODE);
-
+		if (y == y->get_parent()->left) {
+			y->get_parent()->left = x;
 		} else {
-			// 右节点红色
-			brother->set_color(node_color);
-			node->set_color(BLACK);
-			brother->right->set_color(BLACK); // TODO
-
-			rotate_left(node, false);
-			return SUCCESS;
+			y->get_parent()->right = x;
 		}
-	default:
-		return SUCCESS;
 	}
+
+	if (y != z) {
+		// z有左右子树情况，与后继节点交换元素并删除后继节点(2)
+		z->ele = y->ele;
+	}
+	if (y->get_color() == BLACK) {
+		remove_fixup(x);
+	}
+
+	delete y;
 }
 
 template<class T>
-inline RBStatus RBTree<T>::del_fix_right(TreeNode<T>*& _node, RBStatus child_status) {
-	return RBStatus();
+inline void RBTree<T>::insert_fixup(TreeNode<T>* z) {
+	for (TreeNode<T>* zp = z->get_parent();
+		 zp && zp->get_color() == RED;
+		 zp = z->get_parent()) {
+
+		TreeNode<T>* zpp = zp->get_parent(); // 根节点不可能是红色
+
+		if (zp == zpp->left) { 
+			TreeNode<T>* y = zpp->right; // 叔节点 
+			if (y->get_color() == RED) {
+				zp->set_color(BLACK);
+				y->set_color(BLACK);
+				zpp->set_color(RED);
+				z = zpp;
+			} else {
+				if (z == zp->right) {
+					z = zp;
+					left_rotate(z);
+				}
+				z->get_parent()->set_color(BLACK);
+				z->get_parent()->get_parent()->set_color(RED);
+				z->get_parent()->right->set_color(BLACK);
+				right_rotate(z->get_parent()->get_parent());
+			}
+		} else {
+			TreeNode<T>* y = zpp->left; // 叔节点
+			if (y->get_color() == RED) {
+				zp->set_color(BLACK);
+				y->set_color(BLACK);
+				zpp->set_color(RED);
+				z = zpp;
+			} else {
+				if (z == zp->left) {
+					z = zp;
+					right_rotate(z);
+				}
+				z->get_parent()->set_color(BLACK);
+				z->get_parent()->get_parent()->set_color(RED);
+				z->get_parent()->left->set_color(BLACK);
+				left_rotate(z->get_parent()->get_parent());
+			}
+		}
+	}
+	root->set_color(BLACK);
 }
 
 template<class T>
-inline Color RBTree<T>::get_node_color(TreeNode<T>* node) {
-	return node ? node->get_color() : BLACK;
+inline void RBTree<T>::remove_fixup(TreeNode<T>* x) {
+	while (x != root && x->get_color() == BLACK) {
+		TreeNode<T>* w; // 叔节点
+		TreeNode<T>* xp = x->get_parent();
+		if (xp->left == x) {
+			w = xp->right;
+			if (w->get_color() == RED) {
+				// 红色叔节点，转化为黑色叔节点情况
+				w->set_color(BLACK);
+				xp->set_color(RED);
+				left_rotate(xp);
+				w = xp->right;
+			}
+			if (w->left->get_color() == BLACK && w->right->get_color() == BLACK) {
+				// 双黑子树情况，进行上溯
+				w->set_color(RED);
+				x = xp;
+			} else {
+				if (w->right->get_color() == BLACK) {
+					// 子树左红右黑
+					w->left->set_color(BLACK);
+					w->set_color(RED); // 交换w与其左子节点颜色
+					right_rotate(w); // 对w右旋
+					w = xp->right; // 转化为左黑右红情况 
+				}
+				w->set_color(xp->get_color());
+				xp->set_color(BLACK);
+				w->right->set_color(BLACK);
+				left_rotate(xp);
+				x = root;
+			}
+		} else {
+			w = xp->left;
+			if (w->get_color() == RED) {
+				// 红色叔节点，转化为黑色叔节点情况
+				w->set_color(BLACK);
+				xp->set_color(RED);
+				left_rotate(xp);
+				w = xp->left;
+			}
+			if (w->right->get_color() == BLACK && w->left->get_color() == BLACK) {
+				// 双黑子树情况，进行上溯
+				w->set_color(RED);
+				x = xp;
+			} else {
+				if (w->left->get_color() == BLACK) {
+					// 子树左红右黑
+					w->right->set_color(BLACK);
+					w->set_color(RED); // 交换w与其左子节点颜色
+					right_rotate(w); // 对w右旋
+					w = xp->left; // 转化为左黑右红情况 
+				}
+				w->set_color(xp->get_color());
+				xp->set_color(BLACK);
+				w->left->set_color(BLACK);
+				left_rotate(xp);
+				x = root;
+			}
+		}
+	}
+	x->set_color(BLACK);
 }
 
 template<class T>
-inline void RBTree<T>::set_node_color(TreeNode<T>* node, Color color) {
-	node && node->set_color(color);
+inline void RBTree<T>::right_rotate(TreeNode<T>* x) {
+	TreeNode<T>* xp = x->get_parent();
+	TreeNode<T>* y = x->left;
+	if (xp == NIL) {
+		root = y;
+	} else {
+		if (x == xp->right) {
+			xp->right = y;
+		} else {
+			xp->left = y;
+		}
+	}
+	y->set_parent(xp);
+	x->left = y->right;
+	y->right->set_parent(x);
+	y->right = x;
+	x->set_parent(y);
+}
+
+template<class T>
+inline void RBTree<T>::left_rotate(TreeNode<T>* x) {
+	TreeNode<T>* xp = x->get_parent();
+	TreeNode<T>* y = x->right;
+	if (xp == NIL) {
+		root = y;
+	} else {
+		if (x == xp->left) {
+			xp->left = y;
+		} else {
+			xp->right = y;
+		}
+	}
+	y->set_parent(xp);
+	x->right = y->left;
+	y->left->set_parent(x);
+	y->left = x;
+	x->set_parent(y);
+}
+
+template<class T>
+inline TreeNode<T>* RBTree<T>::find(const T& data) {
+	TreeNode<T>* node = root;
+	while (node != NIL) {
+		if (data == node->ele) {
+			return node;
+		} else if (data < node->ele) {
+			node = node->left;
+		} else {
+			node = node->right;
+		}
+	}
+	return node;
+}
+
+template<class T>
+inline TreeNode<T>* RBTree<T>::successor(TreeNode<T>* x) {
+	if (x->right != NIL) {
+		x = x->right;
+		while (x->left != NIL) x = x->left;
+		return x;
+	}
+	TreeNode<T>* y = x->get_parent();
+	while (y != NIL && x == y->right) {
+		x = y;
+		y = y->get_parent();
+	}
+	return x;
 }

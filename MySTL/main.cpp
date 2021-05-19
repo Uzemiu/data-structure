@@ -20,7 +20,7 @@ void test_rbtree() {
 	for (int i = 0; i < to.size(); i++) {
 		tree.insert(to[i]);
 	}
-	int j = 6;
+	int j = 1;
 }
 
 int main() {

@@ -10,10 +10,6 @@ public:
 	void insert(const T& ele);
 	void replace(int i, const T& ele);
 
-	//template<class T>
-	//friend ostream& operator<<(ostream& out, const OrderedList<T>& list);
-	
-
 private:
 	using LinkedList<T>::_size;
 };
@@ -30,11 +26,3 @@ inline void OrderedList<T>::replace(int i, const T& ele) {
 	LinkedList<T>::remove(i);
 	insert(ele);
 }
-
-//template<class T>
-//ostream& operator<<(ostream& out, const OrderedList<T>& list) {
-//	/*list.for_each([&out](T& ele) {
-//		out << ele << " ";
-//				  });*/
-//	return operator<<(out, (LinkedList<T>*)list);
-//}

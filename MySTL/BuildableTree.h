@@ -22,8 +22,8 @@ private:
 template<class T>
 bool BuildableTree<T>::build_tree(LinkedList<T>& supply) {
 	bool res = true;
-	LinkedList<Node<T>*> last_node;
-	last_node.push_last(NULL);
+	LinkedList<Node<T>*> last_nodes;
+	last_nodes.push_last(NULL);
 
 	int count = 0;
 	for (T x, last_x; count < supply.size();) {
@@ -32,29 +32,29 @@ bool BuildableTree<T>::build_tree(LinkedList<T>& supply) {
 			res = false;
 			break;
 		}
-		build_insert(++count, x, last_node);
+		build_insert(++count, x, last_nodes);
 		last_x = x;
 	}
-	root = last_node.peek_last();
-	connect_trees(last_node);
+	root = last_nodes.peek_last();
+	connect_trees(last_nodes);
 	return res;
 }
 
 template<class T>
-void BuildableTree<T>::build_insert(int count, const T& data, LinkedList<Node<T>*>& last_node) {
+void BuildableTree<T>::build_insert(int count, const T& data, LinkedList<Node<T>*>& last_nodes) {
 	int level;
 	for (level = 1; count % 2 == 0; level++) {
 		count /= 2;
 	}
 	Node<T>* next_node = new Node<T>(data);
-	next_node->left = last_node.get(level - 1);
-	if (last_node.size() <= level) {
-		last_node.push_last(next_node);
+	next_node->left = last_nodes.get(level - 1);
+	if (last_nodes.size() <= level) {
+		last_nodes.push_last(next_node);
 	} else {
-		last_node.replace(level, next_node);
+		last_nodes.replace(level, next_node);
 	}
-	if (level + 1 < last_node.size()) {
-		Node<T>*& parent = last_node.get(level + 1);
+	if (level + 1 < last_nodes.size()) {
+		Node<T>*& parent = last_nodes.get(level + 1);
 		if (!parent->right) parent->right = next_node;
 	}
 }

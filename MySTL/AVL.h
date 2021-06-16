@@ -35,6 +35,7 @@ bool AVL<T>::insert(const T& ele) {
 	Node<T>* tmp = insert(root, ele);
 	if (tmp) {
 		root = tmp;
+		_size++;
 		return true;
 	}
 	return false;
@@ -60,7 +61,7 @@ AVL<T>::Node<T>* AVL<T>::insert(TreeNode<T>* node, const T& ele) {
 	else if (ele > node->ele)
 		node->right = insert(node->right, ele);
 	else
-		return NULL;
+		return (Node<T>*)node;
 	return balance(node);
 }
 

@@ -64,7 +64,7 @@ inline void Algorithm::quick_sort(T* arr, int len) {
 
 template<class T>
 void Algorithm::quick_sort(T* arr, int from, int to) {
-	if (from + 10 > to) {
+	if (from + 10 < to) {
 		T pivot = median3(arr, from, to);
 		int i = from;
 		int j = to - 1;
@@ -114,12 +114,13 @@ template<class T>
 void Algorithm::heap_sort(T* arr, int len) {
 	// build heap
 	for (int i = len / 2 - 1; i >= 0; i--) {
+		//从第一个非叶子结点从下至上，从右至左调整结构
 		insert_heap(arr, i, len);
 	}
 
-	for (int i = len; i > 0; i--) {
-		swap(arr[0], arr[i]);
-		insert_heap(arr, 0, i - 1);
+	for (int i = len-1; i > 0; i--) {
+		swap(arr[0], arr[i]);//将堆顶元素与末尾元素进行交换
+		insert_heap(arr, 0, i);
 	}
 }
 
@@ -127,7 +128,7 @@ template<class T>
 T Algorithm::median3(T* arr, int from, int to) {
 	int center = (from + to) / 2;
 	if (arr[center] < arr[from])
-		swap(arr[center], arr[to]);
+		swap(arr[center], arr[from]);
 	if (arr[to] < arr[from])
 		swap(arr[to], arr[from]);
 	if (arr[to] < arr[center])
@@ -140,8 +141,8 @@ T Algorithm::median3(T* arr, int from, int to) {
 template<class T>
 void Algorithm::insert_heap(T* arr, int i, int to) {
 	T tmp = arr[i];
-	for (int j = i * 2 + 1; j <= to; j = j * 2 + 1) {
-		if (j < to && arr[j] < arr[j + 1]) {
+	for (int j = i * 2 + 1; j < to; j = j * 2 + 1) {
+		if (j+1 < to && arr[j] < arr[j + 1]) {
 			j++;
 		}
 		if (arr[j] > tmp) {
@@ -156,7 +157,7 @@ void Algorithm::insert_heap(T* arr, int i, int to) {
 
 template<class T>
 void Algorithm::merge(T* arr, int low, int mid, int high) {
-	int *tmp = new int[high - low + 1];
+	T *tmp = new T[high - low + 1];
 	int start = 0, i = low, j = mid;
 	while (i < mid && j <= high) {
 		if (arr[i] <= arr[j]) {
@@ -192,30 +193,3 @@ template<class T>
 void Algorithm::merge_sort(T *arr, int len) {
 	merge_sort(arr, 0, len - 1);
 }
-
-/*
-void Algorithm::radix_sort(string* arr, int len) {
-	if (!arr) return;
-	LinkedList<string> bucket[MAX_CHAR];
-	int str_len = arr[0].length();
-	for (int i = str_len; i >= 0; i--) {
-		for (int j = 0; j < len; j++) {
-			int order = alphabetic_order(arr[j][i]);
-			bucket[order].push_last(arr[j]);
-		}
-		// rethread
-		int j = 0;
-
-	}
-}
-
-int Algorithm::alphabetic_order(char c) {
-	if (c == ' ') return 0;
-	if (islower(c)) return c - 'a' + 1;
-	if (isupper(c)) return c - 'A' + 1;
-	return 27;
-}
-
-void Algorithm::rethread(LinkedList<string> bucket[28]) {
-}
-*/

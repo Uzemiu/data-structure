@@ -9,6 +9,8 @@ using namespace std;
 template<class T>
 class SortableList : public LinkedList<T> {
 
+	typedef void (*sort_fun)(T*, int);
+
 public:
 	void radix_sort();
 
@@ -21,14 +23,15 @@ public:
 	void quick_sort();
 
 	void merge_sort();
+
+	void heap_sort();
 protected:
 	using LinkedList<T>::_size;
 
 private:
 	int alphabetic_order(char c);
 
-	template<class Fun>
-	void _sort(Fun sort_fun);
+	void _sort(sort_fun sort_fun);
 
 };
 
@@ -84,6 +87,11 @@ inline void SortableList<T>::merge_sort() {
 }
 
 template<class T>
+inline void SortableList<T>::heap_sort() {
+	this->_sort(Algorithm::heap_sort<T>);
+}
+
+template<class T>
 int SortableList<T>::alphabetic_order(char c) {
 	if (c == ' ') return 0;
 	if (islower(c)) return c - 'a' + 1;
@@ -92,8 +100,7 @@ int SortableList<T>::alphabetic_order(char c) {
 }
 
 template<class T>
-template<class Fun>
-inline void SortableList<T>::_sort(Fun _sort_fun) {
+inline void SortableList<T>::_sort(sort_fun _sort_fun) {
 	T* arr = LinkedList<T>::to_array();
 	_sort_fun(arr, _size);
 	for (int i = 0; i < _size; i++) {

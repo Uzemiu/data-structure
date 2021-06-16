@@ -32,6 +32,87 @@ using namespace std;
 class Test {
 public:
 
+
+	template<class T>
+	void assert_ordered(SortableList<T>& list) {
+		for (int i = 1; i < list.size(); i++) {
+			if (list[i] < list[i - 1]) {
+				cout << "List is not ordered" << endl;
+				break;
+			}
+		}
+	}
+
+	void test_sortable_list() {
+		int n = 50;
+		random_device rd;
+		mt19937 rng(rd());
+		int* arr0 = new int[n];
+		for (int i = 0; i < n; i++) arr0[i] = i;
+		shuffle(arr0, arr0 + n, rng);
+
+		SortableList<int> l1;
+		for (int i = 0; i < n; i++) {
+			l1.push_last(arr0[i]);
+		}
+		SortableList<int> l2 = l1, l3 = l1, l4 = l1, l5 = l1, l6 = l1;
+		vector<string> strs = { "rat","mop","cat","map","car","cot","tar","rap" };
+		SortableList<string> l7;
+		for (int i = 0; i < strs.size(); i++) {
+			l7.push_last(strs[i]);
+		}
+
+		cout << "The list is:" << endl;
+		cout << l1 << endl;
+		cout << endl;
+
+		cout << "Insertion sort:" << endl;
+		l1.insertion_sort();
+		assert_ordered(l1);
+		cout << l1 << endl;
+		cout << endl;
+
+		cout << "Selection sort:" << endl;
+		l2.selection_sort();
+		assert_ordered(l2);
+		cout << l2 << endl;
+		cout << endl;
+
+		cout << "Shell sort:" << endl;
+		l3.shell_sort();
+		assert_ordered(l3);
+		cout << l3 << endl;
+		cout << endl;
+
+		cout << "Merge sort:" << endl;
+		l4.merge_sort();
+		assert_ordered(l4);
+		cout << l4 << endl;
+		cout << endl;
+
+		cout << "Quick sort:" << endl;
+		l5.quick_sort();
+		assert_ordered(l5);
+		cout << l5 << endl;
+		cout << endl;
+
+		cout << "Heap sort:" << endl;
+		l6.heap_sort();
+		assert_ordered(l6);
+		cout << l6 << endl;
+		cout << endl;
+
+		cout << "The string list is:" << endl;
+		cout << l7 << endl;
+		cout << endl;
+		cout << "Radix sort:" << endl;
+		l7.radix_sort();
+		assert_ordered(l7);
+		cout << l7 << endl;
+
+		delete[] arr0;
+	}
+
 	void test_ordered_list() {
 		vector<int> eles{ 7,9,4,1,6,2,0,3,5,10,8 };
 		OrderedList<int> list;
@@ -262,30 +343,38 @@ public:
 	}
 
 	void test_avl() {
+		vector<int> eles{ 4,2,1,3,6,5,7,16,15,18,17,14,19,13,20,12,11,10,9,8 };
+		cout << "Insert: ";
+		for (int i = 0; i < eles.size(); i++) {
+			cout << eles[i] << ",";
+		}
+		cout << endl;
 		AVL<int> tree;
-		tree.insert(4);
-		tree.insert(2);
-		tree.insert(1);
-		tree.insert(3);
-		tree.insert(6);
-		tree.insert(5);
-		tree.insert(7);
-		tree.insert(16);
-		tree.insert(15);
-		tree.insert(14);
-		tree.insert(13);
-		tree.insert(12);
-		tree.insert(11);
-		tree.insert(10);
-		tree.insert(9);
-		tree.insert(8);
+		for (int i = 0; i < eles.size(); i++) {
+			tree.insert(eles[i]);
+		}
+		cout << "Preorder: " << endl;
+		tree.pre_order_traverse([](int& ele) {cout << ele << ", "; });
+		cout << endl;
+		cout << "Inorder: " << endl;
+		tree.in_order_traverse([](int& ele) {cout << ele << ", "; });
+		cout << endl;
+		cout << "Postorder: " << endl;
+		tree.post_order_traverse([](int& ele) {cout << ele << ", "; });
+		cout << endl;
 
-		tree.remove(4);
-		tree.remove(6);
-		cout << "------------------------------" << endl;
-		tree.in_order_traverse([](int& ele) {
-			cout << ele << endl;
-							   });
+		cout << endl << "Remove: 16" << endl;
+		tree.remove(16);
+
+		cout << "Preorder: " << endl;
+		tree.pre_order_traverse([](int& ele) {cout << ele << ", "; });
+		cout << endl;
+		cout << "Inorder: " << endl;
+		tree.in_order_traverse([](int& ele) {cout << ele << ", "; });
+		cout << endl;
+		cout << "Postorder: " << endl;
+		tree.post_order_traverse([](int& ele) {cout << ele << ", "; });
+		cout << endl;
 	}
 
 	void test_splay_tree() {
@@ -424,17 +513,16 @@ public:
 		int* arr0 = new int[n];
 		for (int i = 0; i < n; i++) arr0[i] = i;
 
-		start = clock();
 		shuffle(arr0, arr0 + n, rng);
+		start = clock();
 		Algorithm::quick_sort(arr0, n);
-
 		end = clock();
 		cout << "QuickSort: "
 			<< (double)(end - start) / CLOCKS_PER_SEC
 			<< "s" << endl;
 
-		start = clock();
 		shuffle(arr0, arr0 + n, rng);
+		start = clock();
 		sort(arr0, arr0 + n);
 		end = clock();
 		cout << "SystemSort: "
@@ -450,8 +538,8 @@ public:
 		int arr4[14]{ 1,5,10,2,6,76,84,9,62,22,57,8,2,0 };
 		Algorithm::shell_sort(arr4, 14);*/
 
-		start = clock();
 		shuffle(arr0, arr0 + n, rng);
+		start = clock();
 		Algorithm::merge_sort(arr0, n);
 		end = clock();
 		cout << "MergeSort: " 
